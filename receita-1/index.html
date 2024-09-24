@@ -12,10 +12,21 @@
 
         <style>
 
+            body {
+                margin: 10;
+            }
+
+            .table-container {
+                display: flex;
+                justify-content: center;
+                margin: auto;
+            }
+
             table {
-                width: 100%;
+                width: 200;
                 border: none;
                 border-spacing: 0;
+                padding: 1%;
             }
 
             th, td {
@@ -28,18 +39,24 @@
             th {
                 border-top: 2px solid black;   
                 border-bottom: 2px solid black;
+                border-color: #97a3af;
+                background-color: #d3d3d3;
             }
 
             td {
                 border-bottom: 2px solid black;
+                border-color: #97a3af;
+                background-color: #f1f1f1;
             }
 
             th:first-child, td:first-child {
                 border-left: 2px solid black;
+                border-color: #97a3af;
             }
 
             th:last-child, td:last-child {
                 border-right: 2px solid black;
+                border-color: #97a3af;
             }
 
             table tr:first-child th:first-child {
@@ -85,106 +102,210 @@
 
         <br/>
         <br/>
-        
-        <table>
+      
+        <div class="table-container">
 
-            <caption>
-                Preços do Boteco BSI
-            </caption>
+            <table class="table-1">
 
-            <thead>
-                <tr>
-                    <th>
-                        NOME
-                    </th>
-                    <th>
-                        TIPO
-                    </th>
-                    <th>
-                        GRADUAÇÃO ALCOÓLICA (%)
-                    </th>
-                    <th>
-                        PREÇO
-                    </th>
-                </tr>
-            </thead>
+                <caption>
+                    Preços do Boteco BSI 01
+                </caption>
 
-            <tbody>
-                <tr>
-                    <td>
-                        Salinas
-                    </td>
-                    <td>
-                        Envelhecida
-                    </td>
-                    <td>
-                        42%
-                    </td>
-                    <td>
-                        65,00 R$
-                    </td>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>
+                            NOME
+                        </th>
+                        <th>
+                            TIPO
+                        </th>
+                        <th>
+                            GRADUAÇÃO ALCOÓLICA (%)
+                        </th>
+                        <th>
+                            PREÇO
+                        </th>
+                    </tr>
+                </thead>
 
-                <tr>
-                    <td>
-                        Vale Verde
-                    </td>
-                    <td>
-                        Premium
-                    </td>
-                    <td>
-                        40%
-                    </td>
-                    <td>
-                        150,00 R$
-                    </td>
-                </tr>
+                <tbody>
+                    <tr>
+                        <td>
+                            Salinas
+                        </td>
+                        <td>
+                            Envelhecida
+                        </td>
+                        <td>
+                            42%
+                        </td>
+                        <td>
+                            65,00 R$
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td>
-                        Seleta
-                    </td>
-                    <td>
-                        Prata
-                    </td>
-                    <td>
-                        45%
-                    </td>
-                    <td>
-                        45,00 R$
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            Vale Verde
+                        </td>
+                        <td>
+                            Premium
+                        </td>
+                        <td>
+                            40%
+                        </td>
+                        <td>
+                            150,00 R$
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td>
-                        Havana
-                    </td>
-                    <td>
-                        Envelhecida
-                    </td>
-                    <td>
-                        44%
-                    </td>
-                    <td>
-                        400,00 R$
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            Seleta
+                        </td>
+                        <td>
+                            Prata
+                        </td>
+                        <td>
+                            45%
+                        </td>
+                        <td>
+                            45,00 R$
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td>
-                        Praianinha
-                    </td>
-                    <td>
-                        Branca
-                    </td>
-                    <td>
-                        38%
-                    </td>
-                    <td>
-                        25,00 R$
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                    <tr>
+                        <td>
+                            Havana
+                        </td>
+                        <td>
+                            Envelhecida
+                        </td>
+                        <td>
+                            44%
+                        </td>
+                        <td>
+                            400,00 R$
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Praianinha
+                        </td>
+                        <td>
+                            Branca
+                        </td>
+                        <td>
+                            38%
+                        </td>
+                        <td>
+                            25,00 R$
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table-2">
+
+                <caption>
+                    Preços do Boteco BSI 02
+                </caption>
+
+                <thead>
+                    <tr>
+                        <th>
+                            NOME
+                        </th>
+                        <th>
+                            TIPO
+                        </th>
+                        <th>
+                            GRADUAÇÃO ALCOÓLICA (%)
+                        </th>
+                        <th>
+                            PREÇO
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>
+                            Salinas
+                        </td>
+                        <td>
+                            Envelhecida
+                        </td>
+                        <td>
+                            42%
+                        </td>
+                        <td>
+                            65,00 R$
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Vale Verde
+                        </td>
+                        <td>
+                            Premium
+                        </td>
+                        <td>
+                            40%
+                        </td>
+                        <td>
+                            150,00 R$
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Seleta
+                        </td>
+                        <td>
+                            Prata
+                        </td>
+                        <td>
+                            45%
+                        </td>
+                        <td>
+                            45,00 R$
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Havana
+                        </td>
+                        <td>
+                            Envelhecida
+                        </td>
+                        <td>
+                            44%
+                        </td>
+                        <td>
+                            400,00 R$
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Praianinha
+                        </td>
+                        <td>
+                            Branca
+                        </td>
+                        <td>
+                            38%
+                        </td>
+                        <td>
+                            25,00 R$
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </body>
 </html>
