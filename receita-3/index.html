@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+
+<html lang="pt-BR">
+
+    <head>
+
+        <meta charset="utf-8" />
+
+        <meta name="viewport" content="width=device-width" />
+
+        <link href="styles/style-index.css" rel="stylesheet">
+
+    </head>
+
+    <body>
+
+        <title>
+            Receita 03 Programming Web
+        </title>
+
+        <div id="test">
+            <button id="carregar-cervejas">
+                <h1>
+                    Carregando Cervejas...
+                </h1>
+            </button>
+        </div>
+
+   </body>   
+
+   <script>
+
+        function carregarDiv() {
+            let div = document.getElementById("test");
+            div.innerHTML = `<button id="descarregar-cervejas">
+                <h1>
+                    ----------Guinness----------
+                </h1>
+            </button>`;
+        
+            let botaoDescarregar = document.getElementById("descarregar-cervejas");
+            botaoDescarregar.onmouseout = descarregarDiv;
+        }
+
+        function descarregarDiv() {
+            let div = document.getElementById("test");
+            div.innerHTML = `<button id="carregar-cervejas">
+                <h1>
+                    Carregando Cervejas...
+                </h1>
+            </button>`;
+
+            let botaoCarregar = document.getElementById("carregar-cervejas");
+            botaoCarregar.onmouseenter = carregarDiv;
+        }
+
+        let botao = document.getElementById("carregar-cervejas");
+        botao.onmouseenter = carregarDiv;
+
+    </script>
+
+</html>
