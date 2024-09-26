@@ -58,3 +58,71 @@ a:active {
 .nao-poeta {
     transform: rotate(90deg);
 }
+
+.table-container {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
+table {
+    width: 200;
+    border: none;
+    border-spacing: 0;
+    padding: 1%;
+}
+
+th, td {
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+th {
+    border-top: 2px solid black;   
+    border-bottom: 2px solid black;
+    border-color: #97a3af;
+    background-color: #d3d3d3;
+}
+
+td {
+    border-bottom: 2px solid black;
+    border-color: #97a3af;
+    background-color: #f1f1f1;
+}
+
+th:first-child, td:first-child {
+    border-left: 2px solid black;
+    border-color: #97a3af;
+}
+
+th:last-child, td:last-child {
+    border-right: 2px solid black;
+    border-color: #97a3af;
+}
+
+table tr:first-child th:first-child {
+    border-top-left-radius: 10px;
+}
+
+table tr:first-child th:last-child {
+    border-top-right-radius: 10px;
+}
+
+table tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+table tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+caption {
+    font-weight: bold;
+    text-align: center;
+    margin-top: 5%;
+}
