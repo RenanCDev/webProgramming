@@ -19,10 +19,18 @@
             Receita 03 Programming Web
         </title>
 
-        <div id="test">
-            <button id="carregar-cervejas">
+        <div id="test-01">
+            <button id="carregar-cervejas-01">
                 <h1>
                     Carregando Cervejas...
+                </h1>
+            </button>
+        </div>
+
+        <div id="test-02">
+            <button id="descarregar-cervejas-02">
+                <h1>
+                    Guinness
                 </h1>
             </button>
         </div>
@@ -30,34 +38,59 @@
    </body>   
 
    <script>
+function carregarDiv01() {
+        let div = document.getElementById("test-01");
+        div.innerHTML = `<button id="descarregar-cervejas-01">
+            <h1>
+                Guinness
+            </h1>
+        </button>`;
 
-        function carregarDiv() {
-            let div = document.getElementById("test");
-            div.innerHTML = `<button id="descarregar-cervejas">
-                <h1>
-                    ----------Guinness----------
-                </h1>
-            </button>`;
-        
-            let botaoDescarregar = document.getElementById("descarregar-cervejas");
-            botaoDescarregar.onmouseout = descarregarDiv;
-        }
+        let botaoDescarregar01 = document.getElementById("descarregar-cervejas-01");
+        botaoDescarregar01.onmouseout = descarregarDiv01;
+    }
 
-        function descarregarDiv() {
-            let div = document.getElementById("test");
-            div.innerHTML = `<button id="carregar-cervejas">
-                <h1>
-                    Carregando Cervejas...
-                </h1>
-            </button>`;
+    function descarregarDiv01() {
+        let div = document.getElementById("test-01");
+        div.innerHTML = `<button id="carregar-cervejas-01">
+            <h1>
+                Carregando Cervejas...
+            </h1>
+        </button>`;
 
-            let botaoCarregar = document.getElementById("carregar-cervejas");
-            botaoCarregar.onmouseenter = carregarDiv;
-        }
+        let botaoCarregar01 = document.getElementById("carregar-cervejas-01");
+        botaoCarregar01.onmouseenter = carregarDiv01;
+    }
 
-        let botao = document.getElementById("carregar-cervejas");
-        botao.onmouseenter = carregarDiv;
+    function descarregarDiv02() {
+        let div = document.getElementById("test-02");
+        div.innerHTML = `<button id="carregar-cervejas-02">
+            <h1>
+                Carregando Cervejas...
+            </h1>
+        </button>`;
 
+        let botaoCarregar02 = document.getElementById("carregar-cervejas-02");
+        botaoCarregar02.onmouseout = carregarDiv02;
+    }
+
+    function carregarDiv02() {
+        let div = document.getElementById("test-02");
+        div.innerHTML = `<button id="descarregar-cervejas-02">
+            <h1>
+                Guinness
+            </h1>
+        </button>`;
+
+        let botaoDescarregar02 = document.getElementById("descarregar-cervejas-02");
+        botaoDescarregar02.onmouseenter = descarregarDiv02;
+    }
+
+    let botao01 = document.getElementById("carregar-cervejas-01");
+    botao01.onmouseenter = carregarDiv01;
+
+    let botao02 = document.getElementById("descarregar-cervejas-02");
+    botao02.onmouseenter = descarregarDiv02;
     </script>
 
 </html>
