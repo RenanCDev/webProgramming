@@ -19,6 +19,36 @@
             Receita 04 Programming Web
         </title>
 
+        <div id="test">
+            <button id="loadButton">
+                <h1>
+                    Load Beers...
+                </h1>
+            </button>
+        </div>
+
    </body>   
+
+   <script>
+
+        let beers = ["Bramah", "Becks", "Spaten", "Skol"]
+
+        function transformation(item) {
+            return `<h1>${item}</h1>`
+        }
+
+        function loadDiv() {
+            let div = document.getElementById("test")
+            let beersHtml = beers.map(transformation)
+            
+            div.innerHTML = `
+            ${beersHtml.join("\n")}
+            `
+        }
+
+        let button = document.getElementById("loadButton")
+        button.addEventListener("click", loadDiv)
+
+   </script>
    
 </html>
