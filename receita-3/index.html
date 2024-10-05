@@ -22,7 +22,7 @@
         <div id="button">
             <button id="beer">
                 <h1>
-                    Press to load beer
+                    Press to load / unload beers
                 </h1>
             </button>
         </div>
@@ -43,12 +43,23 @@
 
             if (div.innerHTML.trim() ==="") {
                 div.innerHTML = `
-                <h2>Guinness</h2>
-                <h2>Heineken</h2>
-                <h2>Corona</h2>
+                <h2 class="fade">Guinness</h2>
+                <h2 class="fade">Heineken</h2>
+                <h2 class="fade">Corona</h2>
             `;
+
+                setTimeout(() => {
+                    document.querySelectorAll(".fade").forEach(el => el.classList.add ("show"));
+                }, 10);
+
             } else {
-                div.innerHTML = "";
+                document.querySelectorAll(".fade").forEach(el => {
+                    el.classList.remove("show");
+                });
+
+                setTimeout(() => {
+                    div.innerHTML = "";
+                }, 500);
             }
         }
 
