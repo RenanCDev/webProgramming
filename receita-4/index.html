@@ -1,54 +1,65 @@
 <!DOCTYPE html>
-
-
 <html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link href="styles/style-index.css" rel="stylesheet">
+</head>
+<body>
+    <title>
+        Receita 04 Programming Web
+    </title>
 
-    <head>
+    <div id="test">
+        <button id="loadButton">
+            <h1>
+                Load Beers
+            </h1>
+        </button>
+        <button id="sortBeer">
+            <h1>
+                Sort Beers
+            </h1>
+        </button>
+        <button id="shuffleBeer">
+            <h1>
+                Shuffle Beers
+            </h1>
+        </button>
+    </div>
+    <div id="printBeers">
+    </div>
 
-        <meta charset="utf-8" />
+</body>   
 
-        <meta name="viewport" content="width=device-width" />
+<script>
+    let beers = ["Bramah", "Becks", "Spaten", "Skol"];
 
-        <link href="styles/style-index.css" rel="stylesheet">
+    function transformation(item) {
+        return `<div id="beers" class="beers fade">${item}</div>`;
+    }
 
-    </head>
+    function loadDiv() {
+        let div = document.getElementById("printBeers");
+        let button = document.getElementById("loadButton");
 
-    <body>
-
-        <title>
-            Receita 04 Programming Web
-        </title>
-
-        <div id="test">
-            <button id="loadButton">
-                <h1>
-                    Load Beers...
-                </h1>
-            </button>
-        </div>
-
-   </body>   
-
-   <script>
-
-        let beers = ["Bramah", "Becks", "Spaten", "Skol"]
-
-        function transformation(item) {
-            return `<div id="beers">${item}</div>`
+        if (div.innerHTML.trim() === "") {
+            let beersHtml = beers.map(transformation);
+            div.innerHTML = beersHtml.join("\n");
+            document.querySelectorAll(".fade").forEach(el => {
+                setTimeout(() => el.classList.add("show"), 10);
+            });
+            button.querySelector("h1").textContent = "Unload Beers";
+        } else {
+            document.querySelectorAll(".fade").forEach(el => {
+                el.classList.remove("show");
+            });
+            setTimeout(() => div.innerHTML = "", 300);
+            button.querySelector("h1").textContent = "Load Beers";
         }
+    }
 
-        function loadDiv() {
-            let div = document.getElementById("test")
-            let beersHtml = beers.map(transformation)
-            
-            div.innerHTML = `
-            ${beersHtml.join("\n")}
-            `
-        }
-
-        let button = document.getElementById("loadButton")
-        button.addEventListener("click", loadDiv)
-
-   </script>
-   
+    let button = document.getElementById("loadButton");
+    button.addEventListener("click", loadDiv);
+</script>
 </html>
