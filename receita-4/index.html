@@ -12,19 +12,13 @@
 
     <div id="test">
         <button id="loadButton">
-            <h1>
-                Load Beers
-            </h1>
+            <h1>Load Beers</h1>
         </button>
         <button id="sortBeer">
-            <h1>
-                Sort Beers
-            </h1>
+            <h1>Sort Beers</h1>
         </button>
-        <button id="shuffleBeer">
-            <h1>
-                Shuffle Beers
-            </h1>
+        <button id="shuffleBeers">
+            <h1>Shuffle Beers</h1>
         </button>
     </div>
     <div id="printBeers">
@@ -33,7 +27,11 @@
 </body>   
 
 <script>
-    let beers = ["Bramah", "Becks", "Spaten", "Skol"];
+    let beers = [
+        "Brahma", "Skol", "Antarctica", "Bohemia", "Budweiser", "Stella Artois", 
+        "Becks", "Corona", "Patagonia", "Serramalte", "Colorado", "Leffe", 
+        "Hoegaarden", "Cervejaria Wäls", "Michelob Ultra", "Quilmes"
+    ];
 
     function transformation(item) {
         return `<div id="beers" class="beers fade">${item}</div>`;
@@ -44,22 +42,36 @@
         let button = document.getElementById("loadButton");
 
         if (div.innerHTML.trim() === "") {
-            let beersHtml = beers.map(transformation);
-            div.innerHTML = beersHtml.join("\n");
-            document.querySelectorAll(".fade").forEach(el => {
-                setTimeout(() => el.classList.add("show"), 10);
-            });
+            renderBeers(beers);
             button.querySelector("h1").textContent = "Unload Beers";
         } else {
-            document.querySelectorAll(".fade").forEach(el => {
-                el.classList.remove("show");
-            });
+            document.querySelectorAll(".fade").forEach(el => el.classList.remove("show"));
             setTimeout(() => div.innerHTML = "", 300);
             button.querySelector("h1").textContent = "Load Beers";
         }
     }
 
-    let button = document.getElementById("loadButton");
-    button.addEventListener("click", loadDiv);
+    function renderBeers(list) {
+        let div = document.getElementById("printBeers");
+        let beersHtml = list.map(transformation);
+        div.innerHTML = beersHtml.join("\n");
+        document.querySelectorAll(".fade").forEach(el => {
+            setTimeout(() => el.classList.add("show"), 10);
+        });
+    }
+
+    function sortBeers() {
+        beers.sort();
+        renderBeers(beers);
+    }
+
+    function shuffleBeers() {
+        beers = beers.sort(() => Math.random() - 0.5); 
+        renderBeers(beers);  
+    }
+
+    document.getElementById("loadButton").addEventListener("click", loadDiv);
+    document.getElementById("sortBeer").addEventListener("click", sortBeers);
+    document.getElementById("shuffleBeers").addEventListener("click", shuffleBeers);
 </script>
 </html>
