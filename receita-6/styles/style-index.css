@@ -1,0 +1,54 @@
+html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #dbdbdb;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+div {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin: 0.2%;
+}
+
+button {
+    color: #000000;
+    background-color: #b9b9b9;
+    border: 3px solid #000000;
+    height: 70px;
+    width: 400px;
+    border-radius: 2cap;
+}
+
+.fade {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.fade.show {
+    opacity: 1;
+}
+
+#beers {
+    border: 3px solid #000000;
+    height: auto;
+    width: 400px;
+    border-radius: 2cap;
+    color: #000000;
+    background-color: #b9b9b9;
+}
+
+button:active {
+    color: #000000;
+    background-color: #acacac;
+}
