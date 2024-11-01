@@ -1,18 +1,73 @@
 <!DOCTYPE html>
-
-
 <html lang="pt-BR">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width" />
-        <link href="styles/style-index.css" rel="stylesheet">
-    </head>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link href="styles/style-index.css" rel="stylesheet">
+</head>
+<body>
+    <title>
+        Receita 05 Programming Web
+    </title>
 
-    <body>
-        <title>
-            Receita 05 Programming Web
-        </title>
-        <div id="test">
-        </div>
-   </body>   
+    <div id="test">
+        <button id="loadButton">
+            <h1>Load Beers</h1>
+        </button>
+        <button id="sortBeer">
+            <h1>Sort Beers</h1>
+        </button>
+        <button id="shuffleBeers">
+            <h1>Shuffle Beers</h1>
+        </button>
+    </div>
+    <div id="printBeers">
+    </div>
+
+</body>   
+
+<script>
+    let beers = [
+        "Brahma", "Skol", "Antarctica", "Bohemia", "Budweiser", "Stella Artois", 
+            "Becks", "Corona", "Patagonia", "Serramalte", "Colorado", "Leffe", 
+        "Hoegaarden", "Cervejaria Wäls", "Michelob Ultra", "Quilmes"
+    ];
+
+    const loadDiv = () => {
+        const div = document.getElementById("printBeers");
+        const button = document.getElementById("loadButton");
+
+        if (div.innerHTML.trim() === "") {
+            renderBeers(beers);
+            button.querySelector("h1").textContent = "Unload Beers";
+        } else {
+            document.querySelectorAll(".fade").forEach(el => el.classList.remove("show"));
+            setTimeout(() => div.innerHTML = "", 300);
+            button.querySelector("h1").textContent = "Load Beers";
+        }
+    }
+
+    const renderBeers = (list) => {
+        const div = document.getElementById("printBeers");
+        const beersHtml = list.map(item => `<div id="beers" class="beers fade">${item}</div>`);
+        div.innerHTML = beersHtml.join("\n");
+        document.querySelectorAll(".fade").forEach(el => {
+            setTimeout(() => el.classList.add("show"), 10);
+        });
+    }
+
+    const sortBeers = () => {
+        beers.sort();
+        renderBeers(beers);
+    }
+
+    const shuffleBeers = () => {
+        beers = beers.sort(() => Math.random() - 0.5); 
+        renderBeers(beers);  
+    }
+
+    document.getElementById("loadButton").addEventListener("click", loadDiv);
+    document.getElementById("sortBeer").addEventListener("click", sortBeers);
+    document.getElementById("shuffleBeers").addEventListener("click", shuffleBeers);
+</script>
 </html>
