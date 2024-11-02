@@ -4,70 +4,68 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <link href="styles/style-index.css" rel="stylesheet">
+    <title>Receita 05 Programming Web</title>
 </head>
 <body>
-    <title>
-        Receita 05 Programming Web
-    </title>
-
     <div id="test">
-        <button id="loadButton">
-            <h1>Load Beers</h1>
-        </button>
-        <button id="sortBeer">
-            <h1>Sort Beers</h1>
-        </button>
-        <button id="shuffleBeers">
-            <h1>Shuffle Beers</h1>
-        </button>
+        <a href="#" id="loadButtonLink"><h1>Load Beers</h1></a>
+        <a href="#" id="sortBeerLink"><h1>Sort Beers</h1></a>
+        <a href="#" id="shuffleBeersLink"><h1>Shuffle Beers</h1></a>
     </div>
-    <div id="printBeers">
-    </div>
+    <div id="printBeers"></div>
 
-</body>   
-
-<script>
-    let beers = [
-        "Brahma", "Skol", "Antarctica", "Bohemia", "Budweiser", "Stella Artois", 
+    <script>
+        let beers = [
+            "Brahma", "Skol", "Antarctica", "Bohemia", "Budweiser", "Stella Artois", 
             "Becks", "Corona", "Patagonia", "Serramalte", "Colorado", "Leffe", 
-        "Hoegaarden", "Cervejaria Wäls", "Michelob Ultra", "Quilmes"
-    ];
+            "Hoegaarden", "Cervejaria Wäls", "Michelob Ultra", "Quilmes"
+        ];
 
-    const loadDiv = beer => {
-        const div = document.getElementById("printBeers");
-        const button = document.getElementById("loadButton");
+        const loadDiv = (cervs) => {
+            const div = document.getElementById("printBeers");
+            const link = document.getElementById("loadButtonLink");
 
-        if (div.innerHTML.trim() === "") {
-            renderBeers(beers);
-            button.querySelector("h1").textContent = "Unload Beers";
-        } else {
-            document.querySelectorAll(".fade").forEach(el => el.classList.remove("show"));
-            setTimeout(() => div.innerHTML = "", 300);
-            button.querySelector("h1").textContent = "Load Beers";
+            if (div.innerHTML.trim() === "") {
+                renderBeers(cervs);
+                link.querySelector("h1").textContent = "Unload Beers";
+            } else {
+                document.querySelectorAll(".fade").forEach(el => el.classList.remove("show"));
+                setTimeout(() => div.innerHTML = "", 300);
+                link.querySelector("h1").textContent = "Load Beers";
+            }
         }
-    }
 
-    const renderBeers = (list) => {
-        const div = document.getElementById("printBeers");
-        const beersHtml = list.map(item => `<div id="beers" class="beers fade">${item}</div>`);
-        div.innerHTML = beersHtml.join("\n");
-        document.querySelectorAll(".fade").forEach(el => {
-            setTimeout(() => el.classList.add("show"), 10);
+        const renderBeers = (list) => {
+            const div = document.getElementById("printBeers");
+            const beersHtml = list.map(item => `<div class="beers fade">${item}</div>`);
+            div.innerHTML = beersHtml.join("\n");
+            document.querySelectorAll(".fade").forEach(el => {
+                setTimeout(() => el.classList.add("show"), 10);
+            });
+        }
+
+        const sortBeers = () => {
+            beers.sort();
+            renderBeers(beers);
+        }
+
+        const shuffleBeers = () => {
+            beers = beers.sort(() => Math.random() - 0.5); 
+            renderBeers(beers);  
+        }
+
+        document.getElementById("loadButtonLink").addEventListener("click", (event) => {
+            event.preventDefault();
+            loadDiv(beers);
         });
-    }
-
-    const sortBeers = () => {
-        beers.sort();
-        renderBeers(beers);
-    }
-
-    const shuffleBeers = () => {
-        beers = beers.sort(() => Math.random() - 0.5); 
-        renderBeers(beers);  
-    }
-
-    document.getElementById("loadButton").addEventListener("click", loadDiv);
-    document.getElementById("sortBeer").addEventListener("click", sortBeers);
-    document.getElementById("shuffleBeers").addEventListener("click", shuffleBeers);
-</script>
+        document.getElementById("sortBeerLink").addEventListener("click", (event) => {
+            event.preventDefault();
+            sortBeers();
+        });
+        document.getElementById("shuffleBeersLink").addEventListener("click", (event) => {
+            event.preventDefault();
+            shuffleBeers();
+        });
+    </script>
+</body>
 </html>
