@@ -18,17 +18,9 @@
         </button>
     </div>
     <div id="printBeers">
-        <table id="beersTable" style="width: 100%; border-collapse: collapse; display: none;">
-            <thead>
-                <tr>
-                    <th style="border: 1px solid #000;">Nome</th>
-                    <th style="border: 1px solid #000;">Álcool</th>
-                    <th style="border: 1px solid #000;">Style</th>
-                    <th style="border: 1px solid #000;">IBU</th>
-                </tr>
-            </thead>
-            <tbody id="beersTableBody"></tbody>
-        </table>
+        <div id="cervejasDiv">
+            <!-- A tabela será carregada aqui por padrão -->
+        </div>
     </div>
 
     <script>
@@ -51,35 +43,49 @@
             { "name": "Quilmes", "alcoholContent": "4.9 %", "style": "Cream Ale", "ibu": "18" }
         ];
 
-        const loadDiv = () => {
-            const table = document.getElementById("beersTable");
+        const loadDiv = (targetId = "cervejasDiv") => {
+            const targetElement = document.getElementById(targetId);
             const button = document.getElementById("loadButton");
 
-            if (table.style.display === "none") {
-                renderBeers(beers);
-                table.style.display = "table"; // Mostra a tabela
+            if (targetElement && targetElement.innerHTML === "") {
+                renderBeers(beers, targetId);
                 button.querySelector("h1").textContent = "Unload Beers";
             } else {
-                document.getElementById("beersTableBody").innerHTML = ""; // Limpa a tabela
-                table.style.display = "none"; // Oculta a tabela
+                targetElement.innerHTML = ""; // Limpa o conteúdo do elemento
                 button.querySelector("h1").textContent = "Load Beers";
             }
         }
 
-        const renderBeers = (list) => {
-            const tbody = document.getElementById("beersTableBody");
-            tbody.innerHTML = ""; // Limpa o corpo da tabela
+        const renderBeers = (list, targetId = "cervejasDiv") => {
+            const targetElement = document.getElementById(targetId);
+            if (!targetElement) return;
 
-            const beersHtml = list.map(({ name, alcoholContent, style, ibu }) => 
-                `<tr>
-                    <td style="border: 1px solid #000;">${name}</td>
-                    <td style="border: 1px solid #000;">${alcoholContent}</td>
-                    <td style="border: 1px solid #000;">${style}</td>
-                    <td style="border: 1px solid #000;">${ibu}</td>
-                </tr>`
-            );
+            // Criar a tabela e seu conteúdo
+            const tableHtml = `
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr>
+                            <th style="border: 1px solid #000;">Nome</th>
+                            <th style="border: 1px solid #000;">Álcool</th>
+                            <th style="border: 1px solid #000;">Style</th>
+                            <th style="border: 1px solid #000;">IBU</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${list.map(({ name, alcoholContent, style, ibu }) => 
+                            `<tr>
+                                <td style="border: 1px solid #000;">${name}</td>
+                                <td style="border: 1px solid #000;">${alcoholContent}</td>
+                                <td style="border: 1px solid #000;">${style}</td>
+                                <td style="border: 1px solid #000;">${ibu}</td>
+                            </tr>`
+                        ).join("\n")}
+                    </tbody>
+                </table>
+            `;
 
-            tbody.innerHTML = beersHtml.join("\n");
+            // Insere a tabela no elemento alvo
+            targetElement.innerHTML = tableHtml;
         }
 
         const sortBeers = () => {
@@ -92,7 +98,7 @@
             renderBeers(beers);  
         }
 
-        document.getElementById("loadButton").addEventListener("click", loadDiv);
+        document.getElementById("loadButton").addEventListener("click", () => loadDiv());
         document.getElementById("sortBeer").addEventListener("click", sortBeers);
         document.getElementById("shuffleBeers").addEventListener("click", shuffleBeers);
     </script>
