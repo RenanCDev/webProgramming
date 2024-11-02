@@ -43,12 +43,12 @@
             { "name": "Quilmes", "alcoholContent": "4.9 %", "style": "Cream Ale", "ibu": "18" }
         ];
 
-        const loadDiv = (targetId = "cervejasDiv") => {
+        const loadDiv = (targetId = "cervejasDiv", headers = ["Nome", "Álcool", "Estilo", "Amargor"]) => {
             const targetElement = document.getElementById(targetId);
             const button = document.getElementById("loadButton");
 
             if (targetElement && targetElement.innerHTML === "") {
-                renderBeers(beers, targetId);
+                renderBeers(beers, targetId, headers);
                 button.querySelector("h1").textContent = "Unload Beers";
             } else {
                 targetElement.innerHTML = ""; // Limpa o conteúdo do elemento
@@ -56,19 +56,19 @@
             }
         }
 
-        const renderBeers = (list, targetId = "cervejasDiv") => {
+        const renderBeers = (list, targetId = "cervejasDiv", headers = ["Nome", "Álcool", "Estilo", "Amargor"]) => {
             const targetElement = document.getElementById(targetId);
             if (!targetElement) return;
 
-            // Criar a tabela e seu conteúdo
+            // Cria a tabela com os cabeçalhos especificados
             const tableHtml = `
                 <table style="width: 100%; border-collapse: collapse;">
                     <thead>
                         <tr>
-                            <th style="border: 1px solid #000;">Nome</th>
-                            <th style="border: 1px solid #000;">Álcool</th>
-                            <th style="border: 1px solid #000;">Style</th>
-                            <th style="border: 1px solid #000;">IBU</th>
+                            <th style="border: 1px solid #000;">${headers[0]}</th>
+                            <th style="border: 1px solid #000;">${headers[1]}</th>
+                            <th style="border: 1px solid #000;">${headers[2]}</th>
+                            <th style="border: 1px solid #000;">${headers[3]}</th>
                         </tr>
                     </thead>
                     <tbody>
