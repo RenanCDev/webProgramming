@@ -1,67 +1,107 @@
-html {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #dbdbdb;
-}
-
-body {
+/* Corpo da página */
+html, body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f3f6f9;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
-
-div {
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-    margin: 0.2%;
-}
-
-button {
-    color: #000000;
-    background-color: #b9b9b9;
-    border: 3px solid #000000;
-    height: 70px;
-    width: 400px;
-    border-radius: 2cap;
-}
-
-.fade {
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-}
-
-.fade.show {
-    opacity: 1;
-}
-
-#beers {
-    border: 0.5px solid #000000;
-    height: auto;
-    width: 400px;
-    border-radius: 2cap;
-    color: #000000;
-    background-color: #b9b9b9;
-    border-radius: 0;
     margin: 0;
-    font-size: 30px;
+    padding: 20px;
+    color: #333;
+}
+
+/* Contêiner dos botões */
+#test {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 800px;
+}
+
+/* Botões principais */
+button {
+    color: #ffffff;
+    background-color: #007bff; /* Azul claro e elegante */
+    border: none;
+    height: 60px;
+    width: 200px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
 }
 
 button:active {
-    color: #000000;
-    background-color: #acacac;
+    transform: scale(0.98);
 }
 
-#test {
-    display: flex;
-    gap: 1%;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+button h1 {
+    margin: 0;
+    font-size: 1em;
+}
+
+/* Estilo da Tabela */
+table#beersTable {
+    width: 80%;
+    max-width: 800px;
+    margin-top: 20px;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Cabeçalho da tabela */
+table#beersTable th {
+    background-color: #007bff;
+    color: #ffffff;
+    font-size: 1.1em;
+    padding: 15px;
+    border-bottom: 2px solid #0056b3;
+}
+
+/* Corpo da tabela */
+table#beersTable td {
+    padding: 12px;
+    text-align: center;
+    font-size: 1em;
+    color: #333;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+/* Linhas alternadas e efeito hover */
+table#beersTable tr:nth-child(even) {
+    background-color: #f9fbfd;
+}
+
+table#beersTable tr:hover {
+    background-color: #f1f7fd;
+    cursor: default;
+}
+
+/* Ajuste do layout para dispositivos móveis */
+@media (max-width: 768px) {
+    #test {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    button {
+        width: 90%;
+    }
+
+    table#beersTable {
+        width: 100%;
+    }
 }
