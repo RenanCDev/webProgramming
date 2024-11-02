@@ -1,4 +1,4 @@
-/* Corpo da página */
+
 html, body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f3f6f9;
@@ -11,7 +11,6 @@ html, body {
     color: #333;
 }
 
-/* Contêiner dos botões */
 #test {
     display: flex;
     gap: 20px;
@@ -22,10 +21,9 @@ html, body {
     max-width: 800px;
 }
 
-/* Botões principais */
 button {
     color: #ffffff;
-    background-color: #007bff; /* Azul claro e elegante */
+
     border: none;
     height: 60px;
     width: 200px;
@@ -50,7 +48,6 @@ button h1 {
     font-size: 1em;
 }
 
-/* Estilo da Tabela */
 table#beersTable {
     width: 80%;
     max-width: 800px;
@@ -62,7 +59,6 @@ table#beersTable {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Cabeçalho da tabela */
 table#beersTable th {
     background-color: #007bff;
     color: #ffffff;
@@ -71,7 +67,6 @@ table#beersTable th {
     border-bottom: 2px solid #0056b3;
 }
 
-/* Corpo da tabela */
 table#beersTable td {
     padding: 12px;
     text-align: center;
@@ -80,7 +75,6 @@ table#beersTable td {
     border-bottom: 1px solid #f1f1f1;
 }
 
-/* Linhas alternadas e efeito hover */
 table#beersTable tr:nth-child(even) {
     background-color: #f9fbfd;
 }
@@ -90,7 +84,6 @@ table#beersTable tr:hover {
     cursor: default;
 }
 
-/* Ajuste do layout para dispositivos móveis */
 @media (max-width: 768px) {
     #test {
         flex-direction: column;

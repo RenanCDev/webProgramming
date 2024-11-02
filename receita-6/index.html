@@ -19,7 +19,6 @@
     </div>
     <div id="printBeers">
         <div id="cervejasDiv">
-            <!-- A tabela será carregada aqui por padrão -->
         </div>
     </div>
 
@@ -60,7 +59,6 @@
             const targetElement = document.getElementById(targetId);
             if (!targetElement) return;
 
-            // Cria a tabela com os cabeçalhos especificados
             const tableHtml = `
                 <table style="width: 100%; border-collapse: collapse;">
                     <thead>
@@ -78,7 +76,6 @@
                 </table>
             `;
 
-            // Insere a tabela no elemento alvo
             targetElement.innerHTML = tableHtml;
         }
 
