@@ -1,0 +1,100 @@
+
+html, body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f3f6f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+#test {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 800px;
+}
+
+button {
+    color: #ffffff;
+
+    border: none;
+    height: 60px;
+    width: 200px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+button h1 {
+    margin: 0;
+    font-size: 1em;
+}
+
+table#beersTable {
+    width: 80%;
+    max-width: 800px;
+    margin-top: 20px;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+table#beersTable th {
+    background-color: #007bff;
+    color: #ffffff;
+    font-size: 1.1em;
+    padding: 15px;
+    border-bottom: 2px solid #0056b3;
+}
+
+table#beersTable td {
+    padding: 12px;
+    text-align: center;
+    font-size: 1em;
+    color: #333;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+table#beersTable tr:nth-child(even) {
+    background-color: #f9fbfd;
+}
+
+table#beersTable tr:hover {
+    background-color: #f1f7fd;
+    cursor: default;
+}
+
+@media (max-width: 768px) {
+    #test {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    button {
+        width: 90%;
+    }
+
+    table#beersTable {
+        width: 100%;
+    }
+}
