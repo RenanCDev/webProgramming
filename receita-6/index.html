@@ -46,14 +46,19 @@
             const targetElement = document.getElementById(targetId);
             const button = document.getElementById("loadButton");
 
-            if (targetElement && targetElement.innerHTML === "") {
+            const isLoaded = button.getAttribute("data-loaded") === "true";
+
+            if (!isLoaded) {
                 renderBeers(beers, targetId, headers, properties);
                 button.querySelector("h1").textContent = "Unload Beers";
+                button.setAttribute("data-loaded", "true");
             } else {
                 targetElement.innerHTML = "";
                 button.querySelector("h1").textContent = "Load Beers";
+                button.setAttribute("data-loaded", "false");
             }
         }
+
 
         const renderBeers = (list, targetId = "cervejasDiv", headers = ["Nome", "Álcool", "Estilo", "Amargor"], properties = ["name", "alcoholContent", "style", "ibu"]) => {
             const targetElement = document.getElementById(targetId);
