@@ -19,93 +19,59 @@
         </button>
     </div>
     <div id="printBeers">
-        <div id="beersDiv">
-        </div>
+        <div id="tableContainer"></div>
     </div>
 
-    <script>
+    <script type="module">
+        import { generateTable } from './function.js';
+
         let beers = [];
 
-        const loadDiv = (targetId = "beersDiv", headers = ["ID","Brand","Nome","Estílo","HOP","Ano","Malte","IBU","Álcool","BLG"], properties = ["id","brand","name","style","hop","yeast","malts","ibu","alcohol","blg"]) => {
-            const targetElement = document.getElementById(targetId);
+        async function loadBeers() {
             const button = document.getElementById("loadButton");
-
-            const isLoaded = button.getAttribute("data-loaded") === "true";
-
-            if (!isLoaded) {
-                renderBeers(beers, targetId, headers, properties);
-                button.querySelector("h1").textContent = "Unload Beers";
-                button.setAttribute("data-loaded", "true");
-            } else {
-                targetElement.innerHTML = "";
-                button.querySelector("h1").textContent = "Load Beers";
-                button.setAttribute("data-loaded", "false");
-            }
-        }
-
-        async function loadBeers () {
-            const beersDiv = document.getElementById("beersDiv");
-            const button = document.getElementById("loadButton");
+            const tableContainer = document.getElementById("tableContainer");
 
             const isLoaded = button.getAttribute("data-loaded") === "true";
 
             if (isLoaded) {
-                beersDiv.innerHTML = "";
+                tableContainer.innerHTML = "";
                 button.querySelector("h1").textContent = "Load Beers";
                 button.setAttribute("data-loaded", "false");
                 beers = [];
             } else {
-                try{
-                    let res = await fetch("https://random-data-api.com/api/v2/beers?size=25");
+                try {
+                    const res = await fetch("https://random-data-api.com/api/v2/beers?size=25");
                     beers = await res.json();
-                    loadDiv("beersDiv");
-                }catch(err){
-                    document.getElementById("beersDiv").innerHTML = "ERROR!!!";
+
+                    const headers = ["ID", "Brand", "Nome", "Estílo", "HOP", "Ano", "Malte", "IBU", "Álcool", "BLG"];
+                    const properties = ["id", "brand", "name", "style", "hop", "yeast", "malts", "ibu", "alcohol", "blg"];
+
+                    generateTable(beers, headers, properties, "tableContainer");
+
+                    button.querySelector("h1").textContent = "Unload Beers";
+                    button.setAttribute("data-loaded", "true");
+                } catch (err) {
+                    tableContainer.innerHTML = "ERROR!!!";
                 }
             }
         }
 
-
-        const renderBeers = (list, targetId = "beersDiv", headers = ["ID","Brand","Nome","Estílo","HOP","Ano","Malte","IBU","Álcool","BLG"], properties = ["id","brand","name","style","hop","yeast","malts","ibu","alcohol","blg"]) => {
-            const targetElement = document.getElementById(targetId);
-            if (!targetElement) return;
-
-            const tableHtml = `
-                <table>
-                    <thead>
-                        <tr>
-                            ${headers.map(header => `<th>${header}</th>`).join("")}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${list.map(item => 
-                            `<tr>
-                                ${properties.map(prop => `<td>${item[prop] || ""}</td>`).join("")}
-                            </tr>`
-                        ).join("\n")}
-                    </tbody>
-                </table>
-            `;
-
-            targetElement.innerHTML = tableHtml;
-        }
-
         const sortBeers = () => {
             if (beers.length === 0) {
-                document.getElementById("beersDiv").innerHTML = "ERROR!!!";
+                document.getElementById("tableContainer").innerHTML = "ERROR!!!";
                 return;
             }
             beers = beers.sort((a, b) => a.name.localeCompare(b.name));
-            renderBeers(beers);
+            generateTable(beers, ["ID", "Brand", "Nome", "Estílo", "HOP", "Ano", "Malte", "IBU", "Álcool", "BLG"], ["id", "brand", "name", "style", "hop", "yeast", "malts", "ibu", "alcohol", "blg"]);
         }
 
         const shuffleBeers = () => {
             if (beers.length === 0) {
-                document.getElementById("beersDiv").innerHTML = "ERROR!!!";
+                document.getElementById("tableContainer").innerHTML = "ERROR!!!";
                 return;
             }
             beers = beers.sort(() => Math.random() - 0.5); 
-            renderBeers(beers);  
+            generateTable(beers, ["ID", "Brand", "Nome", "Estílo", "HOP", "Ano", "Malte", "IBU", "Álcool", "BLG"], ["id", "brand", "name", "style", "hop", "yeast", "malts", "ibu", "alcohol", "blg"]);
         }
 
         document.getElementById("loadButton").addEventListener("click", loadBeers);
