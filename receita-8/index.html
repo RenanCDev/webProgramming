@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>Receita 06 Programming Web</title>
+    <link href="styles/style-index.css" rel="stylesheet">
+    <title>Receita 08 Programming Web</title>
 </head>
 <body>
     <div id="test">
@@ -18,78 +19,64 @@
         </button>
     </div>
     <div id="printBeers">
-        <div id="cervejasDiv">
-        </div>
+        <div id="tableContainer"></div>
     </div>
 
-    <script>
-        let beers = [
-            { "name": "Brahma", "alcoholContent": "4.8 %", "style": "Lager", "ibu": "18" },
-            { "name": "Skol", "alcoholContent": "4.7 %", "style": "Pilsen", "ibu": "15" },
-            { "name": "Antarctica", "alcoholContent": "4.9 %", "style": "Cream Ale", "ibu": "20" },
-            { "name": "Bohemia", "alcoholContent": "5.0 %", "style": "Red Ale", "ibu": "25" },
-            { "name": "Budweiser", "alcoholContent": "5.0 %", "style": "Lager", "ibu": "10" },
-            { "name": "Stella Artois", "alcoholContent": "5.2 %", "style": "Pilsen", "ibu": "22" },
-            { "name": "Becks", "alcoholContent": "5.0 %", "style": "APA", "ibu": "30" },
-            { "name": "Corona", "alcoholContent": "4.5 %", "style": "Lager", "ibu": "12" },
-            { "name": "Patagonia", "alcoholContent": "5.4 %", "style": "Red Ale", "ibu": "27" },
-            { "name": "Serramalte", "alcoholContent": "5.5 %", "style": "English IPA", "ibu": "40" },
-            { "name": "Colorado", "alcoholContent": "5.2 %", "style": "Imperial Stout", "ibu": "50" },
-            { "name": "Leffe", "alcoholContent": "6.6 %", "style": "Belgian Ale", "ibu": "26" },
-            { "name": "Hoegaarden", "alcoholContent": "4.9 %", "style": "Witbier", "ibu": "15" },
-            { "name": "Cervejaria Wäls", "alcoholContent": "5.6 %", "style": "Pilsen", "ibu": "30" },
-            { "name": "Michelob Ultra", "alcoholContent": "4.2 %", "style": "Lager", "ibu": "10" },
-            { "name": "Quilmes", "alcoholContent": "4.9 %", "style": "Cream Ale", "ibu": "18" }
-        ];
+    <script type="module">
+        import { generateTable } from './function.js';
 
-        const loadDiv = (targetId = "cervejasDiv", headers = ["Nome", "Álcool", "Estilo", "Amargor"], properties = ["name", "alcoholContent", "style", "ibu"]) => {
-            const targetElement = document.getElementById(targetId);
+        let beers = [];
+
+        function loadBeers() {
             const button = document.getElementById("loadButton");
+            const tableContainer = document.getElementById("tableContainer");
 
-            if (targetElement && targetElement.innerHTML === "") {
-                renderBeers(beers, targetId, headers, properties);
-                button.querySelector("h1").textContent = "Unload Beers";
-            } else {
-                targetElement.innerHTML = ""; // Limpa o conteúdo do elemento
+            const isLoaded = button.getAttribute("data-loaded") === "true";
+
+            if (isLoaded) {
+                tableContainer.innerHTML = "";
                 button.querySelector("h1").textContent = "Load Beers";
+                button.setAttribute("data-loaded", "false");
+                beers = [];
+            } else {
+                fetch("https://random-data-api.com/api/v2/beers?size=25")
+                    .then(res => res.json())
+                    .then(data => {
+                        beers = data;
+
+                        const headers = ["ID", "Brand", "Nome", "Estílo", "HOP", "Ano", "Malte", "IBU", "Álcool", "BLG"];
+                        const properties = ["id", "brand", "name", "style", "hop", "yeast", "malts", "ibu", "alcohol", "blg"];
+
+                        generateTable(beers, headers, properties, "tableContainer");
+
+                        button.querySelector("h1").textContent = "Unload Beers";
+                        button.setAttribute("data-loaded", "true");
+                    })
+                    .catch(err => {
+                        tableContainer.innerHTML = "ERROR!!!";
+                    });
             }
         }
 
-        const renderBeers = (list, targetId = "cervejasDiv", headers = ["Nome", "Álcool", "Estilo", "Amargor"], properties = ["name", "alcoholContent", "style", "ibu"]) => {
-            const targetElement = document.getElementById(targetId);
-            if (!targetElement) return;
-
-            const tableHtml = `
-                <table style="width: 100%; border-collapse: collapse;">
-                    <thead>
-                        <tr>
-                            ${headers.map(header => `<th style="border: 1px solid #000;">${header}</th>`).join("")}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${list.map(item => 
-                            `<tr>
-                                ${properties.map(prop => `<td style="border: 1px solid #000;">${item[prop] || ""}</td>`).join("")}
-                            </tr>`
-                        ).join("\n")}
-                    </tbody>
-                </table>
-            `;
-
-            targetElement.innerHTML = tableHtml;
-        }
-
         const sortBeers = () => {
+            if (beers.length === 0) {
+                document.getElementById("tableContainer").innerHTML = "ERROR!!!";
+                return;
+            }
             beers = beers.sort((a, b) => a.name.localeCompare(b.name));
-            renderBeers(beers);
-        }
+            generateTable(beers, ["ID", "Brand", "Nome", "Estílo", "HOP", "Ano", "Malte", "IBU", "Álcool", "BLG"], ["id", "brand", "name", "style", "hop", "yeast", "malts", "ibu", "alcohol", "blg"]);
+        };
 
         const shuffleBeers = () => {
-            beers = beers.sort(() => Math.random() - 0.5); 
-            renderBeers(beers);  
-        }
+            if (beers.length === 0) {
+                document.getElementById("tableContainer").innerHTML = "ERROR!!!";
+                return;
+            }
+            beers = beers.sort(() => Math.random() - 0.5);
+            generateTable(beers, ["ID", "Brand", "Nome", "Estílo", "HOP", "Ano", "Malte", "IBU", "Álcool", "BLG"], ["id", "brand", "name", "style", "hop", "yeast", "malts", "ibu", "alcohol", "blg"]);
+        };
 
-        document.getElementById("loadButton").addEventListener("click", () => loadDiv());
+        document.getElementById("loadButton").addEventListener("click", loadBeers);
         document.getElementById("sortBeer").addEventListener("click", sortBeers);
         document.getElementById("shuffleBeers").addEventListener("click", shuffleBeers);
     </script>
