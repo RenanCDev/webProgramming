@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
+    <link href="styles/style-index.css" rel="stylesheet">
     <title>Receita 06 Programming Web</title>
 </head>
 <body>
@@ -65,16 +66,16 @@
             if (!targetElement) return;
 
             const tableHtml = `
-                <table style="width: 100%; border-collapse: collapse;">
+                <table>
                     <thead>
                         <tr>
-                            ${headers.map(header => `<th style="border: 1px solid #000;">${header}</th>`).join("")}
+                            ${headers.map(header => `<th>${header}</th>`).join("")}
                         </tr>
                     </thead>
                     <tbody>
                         ${list.map(item => 
                             `<tr>
-                                ${properties.map(prop => `<td style="border: 1px solid #000;">${item[prop] || ""}</td>`).join("")}
+                                ${properties.map(prop => `<td>${item[prop] || ""}</td>`).join("")}
                             </tr>`
                         ).join("\n")}
                     </tbody>

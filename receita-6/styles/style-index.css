@@ -23,20 +23,20 @@ html, body {
 
 button {
     color: #ffffff;
-
+    background-color: #757575;
     border: none;
     height: 60px;
     width: 200px;
     border-radius: 8px;
     font-size: 1.1em;
     font-weight: bold;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #969696;
 }
 
 button:active {
@@ -97,4 +97,41 @@ table#beersTable tr:hover {
     table#beersTable {
         width: 100%;
     }
+}
+
+.table-container {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    white-space: nowrap;
+}
+
+table {
+    width: 200;
+    border: none;
+    border-spacing: 0;
+    padding: 1%;
+}
+
+th, td {
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+th {
+    border-top: 2px solid black;   
+    border-bottom: 2px solid black;
+    border-color: #97a3af;
+    background-color: #d3d3d3;
+}
+
+td {
+    border-bottom: 2px solid black;
+    border-color: #97a3af;
+    background-color: #f1f1f1;
 }
