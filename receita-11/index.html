@@ -1,97 +1,90 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Receita 06 Programming Web</title>
-</head>
-<body>
-    <div id="test">
-        <button id="loadButton">
-            <h1>Load Beers</h1>
-        </button>
-        <button id="sortBeer">
-            <h1>Sort Beers</h1>
-        </button>
-        <button id="shuffleBeers">
-            <h1>Shuffle Beers</h1>
-        </button>
-    </div>
-    <div id="printBeers">
-        <div id="cervejasDiv">
-        </div>
-    </div>
+   <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width" />
+      <link href="styles/style-index.css" rel="stylesheet">
+      <title>Receita 11 Programming Web</title>
+   </head>
 
-    <script>
-        let beers = [
-            { "name": "Brahma", "alcoholContent": "4.8 %", "style": "Lager", "ibu": "18" },
-            { "name": "Skol", "alcoholContent": "4.7 %", "style": "Pilsen", "ibu": "15" },
-            { "name": "Antarctica", "alcoholContent": "4.9 %", "style": "Cream Ale", "ibu": "20" },
-            { "name": "Bohemia", "alcoholContent": "5.0 %", "style": "Red Ale", "ibu": "25" },
-            { "name": "Budweiser", "alcoholContent": "5.0 %", "style": "Lager", "ibu": "10" },
-            { "name": "Stella Artois", "alcoholContent": "5.2 %", "style": "Pilsen", "ibu": "22" },
-            { "name": "Becks", "alcoholContent": "5.0 %", "style": "APA", "ibu": "30" },
-            { "name": "Corona", "alcoholContent": "4.5 %", "style": "Lager", "ibu": "12" },
-            { "name": "Patagonia", "alcoholContent": "5.4 %", "style": "Red Ale", "ibu": "27" },
-            { "name": "Serramalte", "alcoholContent": "5.5 %", "style": "English IPA", "ibu": "40" },
-            { "name": "Colorado", "alcoholContent": "5.2 %", "style": "Imperial Stout", "ibu": "50" },
-            { "name": "Leffe", "alcoholContent": "6.6 %", "style": "Belgian Ale", "ibu": "26" },
-            { "name": "Hoegaarden", "alcoholContent": "4.9 %", "style": "Witbier", "ibu": "15" },
-            { "name": "Cervejaria Wäls", "alcoholContent": "5.6 %", "style": "Pilsen", "ibu": "30" },
-            { "name": "Michelob Ultra", "alcoholContent": "4.2 %", "style": "Lager", "ibu": "10" },
-            { "name": "Quilmes", "alcoholContent": "4.9 %", "style": "Cream Ale", "ibu": "18" }
-        ];
+   <body>
+      <div id="app"></div>
+   
+      <script src="libs/react.js"></script>
+      <script src="libs/react-dom.js"></script>
+      <script src="libs/babel.js"></script>
+   
+      <script type="text/babel">
+         function Cabecalho() {
+            return <h1>Minha tabela de cachaças</h1>;
+         }
 
-        const loadDiv = (targetId = "cervejasDiv", headers = ["Nome", "Álcool", "Estilo", "Amargor"], properties = ["name", "alcoholContent", "style", "ibu"]) => {
-            const targetElement = document.getElementById(targetId);
-            const button = document.getElementById("loadButton");
+         const cachacas = [
+            { nome: "Havana", marca: "Engenho Anísio Santiago" },
+            { nome: "Seleta", marca: "Engenho São João Batista" },
+            { nome: "Boazinha", marca: "Engenho Boa Vista" },
+            { nome: "Velho Barreiro", marca: "Tatuzinho 3 Fazendas" },
+            { nome: "Salinas", marca: "Salinas" },
+            { nome: "51", marca: "Companhia Müller de Bebidas" },
+            { nome: "Ypióca", marca: "Ypióca Agroindustrial" },
+            { nome: "Pitu", marca: "Engarrafamento Pitú" },
+            { nome: "Carvalheira", marca: "Engenho Carvalheira" },
+            { nome: "Magnífica", marca: "Engenho D’ouro" },
+         ];
 
-            if (targetElement && targetElement.innerHTML === "") {
-                renderBeers(beers, targetId, headers, properties);
-                button.querySelector("h1").textContent = "Unload Beers";
-            } else {
-                targetElement.innerHTML = ""; // Limpa o conteúdo do elemento
-                button.querySelector("h1").textContent = "Load Beers";
-            }
-        }
-
-        const renderBeers = (list, targetId = "cervejasDiv", headers = ["Nome", "Álcool", "Estilo", "Amargor"], properties = ["name", "alcoholContent", "style", "ibu"]) => {
-            const targetElement = document.getElementById(targetId);
-            if (!targetElement) return;
-
-            const tableHtml = `
-                <table style="width: 100%; border-collapse: collapse;">
-                    <thead>
-                        <tr>
-                            ${headers.map(header => `<th style="border: 1px solid #000;">${header}</th>`).join("")}
+         function TabelaBebidas({ data }) {
+            return (
+               <table id="tabela" border="1">
+                  <thead>
+                     <tr>
+                        <th>Nome</th>
+                        <th>Marca</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     {data.map((cachaca, index) => (
+                        <tr key={index}>
+                           <td>{cachaca.nome}</td>
+                           <td>{cachaca.marca}</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        ${list.map(item => 
-                            `<tr>
-                                ${properties.map(prop => `<td style="border: 1px solid #000;">${item[prop] || ""}</td>`).join("")}
-                            </tr>`
-                        ).join("\n")}
-                    </tbody>
-                </table>
-            `;
+                     ))}
+                  </tbody>
+               </table>
+            );
+         }
 
-            targetElement.innerHTML = tableHtml;
-        }
+         function App() {
+            const [mostrarTabela, setMostrarTabela] = React.useState(false);
+            const [dados, setDados] = React.useState(cachacas);
 
-        const sortBeers = () => {
-            beers = beers.sort((a, b) => a.name.localeCompare(b.name));
-            renderBeers(beers);
-        }
+            const alternarTabela = () => setMostrarTabela(!mostrarTabela);
 
-        const shuffleBeers = () => {
-            beers = beers.sort(() => Math.random() - 0.5); 
-            renderBeers(beers);  
-        }
+            const ordenarDados = () => {
+               const ordenado = [...dados].sort((a, b) =>
+                  a.nome.localeCompare(b.nome)
+               );
+               setDados(ordenado);
+            };
 
-        document.getElementById("loadButton").addEventListener("click", () => loadDiv());
-        document.getElementById("sortBeer").addEventListener("click", sortBeers);
-        document.getElementById("shuffleBeers").addEventListener("click", shuffleBeers);
-    </script>
-</body>
+            const embaralharDados = () => {
+               const embaralhado = [...dados].sort(() => Math.random() - 0.5);
+               setDados(embaralhado);
+            };
+
+            return (
+               <div id="buttons">
+                  <Cabecalho />
+                  <button onClick={alternarTabela}>
+                     {mostrarTabela ? "Esconder Tabela" : "Mostrar Tabela"}
+                  </button>
+                  <button onClick={ordenarDados}>Ordenar</button>
+                  <button onClick={embaralharDados}>Embaralhar</button>
+                  {mostrarTabela && <TabelaBebidas data={dados} />}
+               </div>
+            );
+         }
+
+         ReactDOM.render(<App />, document.getElementById("app"));
+      </script>
+   </body>
 </html>
