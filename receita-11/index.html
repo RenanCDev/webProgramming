@@ -48,7 +48,7 @@
             render() {
                const { detalhes, fecharDetalhes } = this.props;
                return (
-                  <div id="detalhes">
+                  <div className="detalhes">
                      <p>{detalhes}</p>
                      <button onClick={fecharDetalhes}>Fechar</button>
                   </div>
@@ -58,24 +58,27 @@
 
          class TabelaBebidas extends React.Component {
             render() {
-               const { data, onSelect } = this.props;
+               const { titulo, data, onSelect } = this.props;
                return (
-                  <table id="tabela" border="1">
-                     <thead>
-                        <tr>
-                           <th>Nome</th>
-                           <th>Marca</th>
-                        </tr>
-                     </thead>
-                     <tbody>
-                        {data.map((cachaca, index) => (
-                           <tr key={index} onClick={() => onSelect(cachaca)}>
-                              <td>{cachaca.nome}</td>
-                              <td>{cachaca.marca}</td>
+                  <div>
+                     <h1>{titulo}</h1>
+                     <table id="tabela" border="1">
+                        <thead>
+                           <tr>
+                              <th>Nome</th>
+                              <th>Marca</th>
                            </tr>
-                        ))}
-                     </tbody>
-                  </table>
+                        </thead>
+                        <tbody>
+                           {data.map((cachaca, index) => (
+                              <tr key={index} onClick={() => onSelect(cachaca)}>
+                                 <td>{cachaca.nome}</td>
+                                 <td>{cachaca.marca}</td>
+                              </tr>
+                           ))}
+                        </tbody>
+                     </table>
+                  </div>
                );
             }
          }
@@ -130,7 +133,11 @@
                      </div>
                      <div id="table">
                         {mostrarTabela && (
-                           <TabelaBebidas data={dados} onSelect={this.selecionarCachaca} />
+                           <TabelaBebidas
+                              titulo="Tabela de Cachaças"
+                              data={dados}
+                              onSelect={this.selecionarCachaca}
+                           />
                         )}
                         {detalhesAtuais && (
                            <DetalhesCachaca
