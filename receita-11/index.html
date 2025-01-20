@@ -17,7 +17,7 @@
       <script type="text/babel">
          class Cabecalho extends React.Component {
             render() {
-               return <h1>Minha tabela de cachaças</h1>;
+               return <h1>Tabela de Cachaças</h1>;
             }
          }
 
@@ -48,7 +48,7 @@
             render() {
                const { detalhes, fecharDetalhes } = this.props;
                return (
-                  <div className="detalhes">
+                  <div id="detalhes">
                      <p>{detalhes}</p>
                      <button onClick={fecharDetalhes}>Fechar</button>
                   </div>
@@ -117,23 +117,31 @@
             render() {
                const { mostrarTabela, dados, detalhesAtuais } = this.state;
                return (
-                  <div id="buttons">
-                     <Cabecalho />
-                     <button onClick={this.alternarTabela}>
-                        {mostrarTabela ? "Esconder Tabela" : "Mostrar Tabela"}
-                     </button>
-                     <button onClick={this.ordenarDados}>Ordenar</button>
-                     <button onClick={this.embaralharDados}>Embaralhar</button>
-                     {mostrarTabela && (
-                        <TabelaBebidas data={dados} onSelect={this.selecionarCachaca} />
-                     )}
-                     {detalhesAtuais && (
-                        <DetalhesCachaca
-                           detalhes={detalhesAtuais}
-                           fecharDetalhes={this.fecharDetalhes}
-                        />
-                     )}
-                     <Rodape />
+                  <div>
+                     <div id="header">
+                        <Cabecalho />
+                     </div>
+                     <div id="controls">
+                        <button onClick={this.alternarTabela}>
+                           {mostrarTabela ? "Esconder Tabela" : "Mostrar Tabela"}
+                        </button>
+                        <button onClick={this.ordenarDados}>Ordenar</button>
+                        <button onClick={this.embaralharDados}>Embaralhar</button>
+                     </div>
+                     <div id="table">
+                        {mostrarTabela && (
+                           <TabelaBebidas data={dados} onSelect={this.selecionarCachaca} />
+                        )}
+                        {detalhesAtuais && (
+                           <DetalhesCachaca
+                              detalhes={detalhesAtuais}
+                              fecharDetalhes={this.fecharDetalhes}
+                           />
+                        )}
+                     </div>
+                     <div id="footer">
+                        <Rodape />
+                     </div>
                   </div>
                );
             }
