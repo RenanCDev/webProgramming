@@ -10,8 +10,9 @@ html, body {
     color: #333;
 }
 
-#test {
+#buttons {
     display: flex;
+    flex-direction: row;
     gap: 20px;
     justify-content: center;
     align-items: center;
@@ -23,6 +24,8 @@ html, body {
 button {
     color: #ffffff;
     background-color: #6c757d;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
     border: none;
     height: 60px;
     width: 200px;
@@ -43,6 +46,7 @@ button:active {
     transform: scale(0.97);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 
 button h1 {
     margin: 0;

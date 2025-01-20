@@ -23,9 +23,16 @@
             { nome: "Havana", marca: "Engenho Anísio Santiago" },
             { nome: "Seleta", marca: "Engenho São João Batista" },
             { nome: "Boazinha", marca: "Engenho Boa Vista" },
+            { nome: "Velho Barreiro", marca: "Tatuzinho 3 Fazendas" },
+            { nome: "Salinas", marca: "Salinas" },
+            { nome: "51", marca: "Companhia Müller de Bebidas" },
+            { nome: "Ypióca", marca: "Ypióca Agroindustrial" },
+            { nome: "Pitu", marca: "Engarrafamento Pitú" },
+            { nome: "Carvalheira", marca: "Engenho Carvalheira" },
+            { nome: "Magnífica", marca: "Engenho D’ouro" },
          ];
 
-         function TabelaBebidas() {
+         function TabelaBebidas({ data }) {
             return (
                <table id="tabela" border="1">
                   <thead>
@@ -35,7 +42,7 @@
                      </tr>
                   </thead>
                   <tbody>
-                     {cachacas.map((cachaca, index) => (
+                     {data.map((cachaca, index) => (
                         <tr key={index}>
                            <td>{cachaca.nome}</td>
                            <td>{cachaca.marca}</td>
@@ -48,14 +55,31 @@
 
          function App() {
             const [mostrarTabela, setMostrarTabela] = React.useState(false);
+            const [dados, setDados] = React.useState(cachacas);
+
+            const alternarTabela = () => setMostrarTabela(!mostrarTabela);
+
+            const ordenarDados = () => {
+               const ordenado = [...dados].sort((a, b) =>
+                  a.nome.localeCompare(b.nome)
+               );
+               setDados(ordenado);
+            };
+
+            const embaralharDados = () => {
+               const embaralhado = [...dados].sort(() => Math.random() - 0.5);
+               setDados(embaralhado);
+            };
 
             return (
-               <div>
+               <div id="buttons">
                   <Cabecalho />
-                  <button onClick={() => setMostrarTabela(true)}>
-                     Mostrar Tabela
+                  <button onClick={alternarTabela}>
+                     {mostrarTabela ? "Esconder Tabela" : "Mostrar Tabela"}
                   </button>
-                  {mostrarTabela && <TabelaBebidas />}
+                  <button onClick={ordenarDados}>Ordenar</button>
+                  <button onClick={embaralharDados}>Embaralhar</button>
+                  {mostrarTabela && <TabelaBebidas data={dados} />}
                </div>
             );
          }
