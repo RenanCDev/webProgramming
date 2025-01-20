@@ -3,85 +3,140 @@
    <head>
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width" />
-      <link href="styles/style-index.css" rel="stylesheet">
+      <link href="styles/style-index.css" rel="stylesheet" />
       <title>Receita 11 Programming Web</title>
    </head>
 
    <body>
       <div id="app"></div>
-   
+
       <script src="libs/react.js"></script>
       <script src="libs/react-dom.js"></script>
       <script src="libs/babel.js"></script>
-   
+
       <script type="text/babel">
-         function Cabecalho() {
-            return <h1>Minha tabela de cachaças</h1>;
+         class Cabecalho extends React.Component {
+            render() {
+               return <h1>Minha tabela de cachaças</h1>;
+            }
+         }
+
+         class Rodape extends React.Component {
+            render() {
+               return (
+                  <footer>
+                     <p>Desenvolvido por Renan Costa, 2025</p>
+                  </footer>
+               );
+            }
          }
 
          const cachacas = [
-            { nome: "Havana", marca: "Engenho Anísio Santiago" },
-            { nome: "Seleta", marca: "Engenho São João Batista" },
-            { nome: "Boazinha", marca: "Engenho Boa Vista" },
-            { nome: "Velho Barreiro", marca: "Tatuzinho 3 Fazendas" },
-            { nome: "Salinas", marca: "Salinas" },
-            { nome: "51", marca: "Companhia Müller de Bebidas" },
-            { nome: "Ypióca", marca: "Ypióca Agroindustrial" },
-            { nome: "Pitu", marca: "Engarrafamento Pitú" },
-            { nome: "Carvalheira", marca: "Engenho Carvalheira" },
-            { nome: "Magnífica", marca: "Engenho D’ouro" },
+            { nome: "Havana", marca: "Engenho Anísio Santiago", detalhes: "Produzida em Salinas-MG." },
+            { nome: "Seleta", marca: "Engenho São João Batista", detalhes: "Uma das mais tradicionais do Brasil." },
+            { nome: "Boazinha", marca: "Engenho Boa Vista", detalhes: "Com sabor suave e marcante." },
+            { nome: "Velho Barreiro", marca: "Tatuzinho 3 Fazendas", detalhes: "Popular em todo o Brasil." },
+            { nome: "Salinas", marca: "Salinas", detalhes: "Ganhou vários prêmios de qualidade." },
+            { nome: "51", marca: "Companhia Müller de Bebidas", detalhes: "Famosa por sua acessibilidade." },
+            { nome: "Ypióca", marca: "Ypióca Agroindustrial", detalhes: "Produção com tradição de mais de 150 anos." },
+            { nome: "Pitu", marca: "Engarrafamento Pitú", detalhes: "Muito popular no nordeste." },
+            { nome: "Carvalheira", marca: "Engenho Carvalheira", detalhes: "Cachaça artesanal pernambucana." },
+            { nome: "Magnífica", marca: "Engenho D’ouro", detalhes: "Feita com fermentação natural." },
          ];
 
-         function TabelaBebidas({ data }) {
-            return (
-               <table id="tabela" border="1">
-                  <thead>
-                     <tr>
-                        <th>Nome</th>
-                        <th>Marca</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     {data.map((cachaca, index) => (
-                        <tr key={index}>
-                           <td>{cachaca.nome}</td>
-                           <td>{cachaca.marca}</td>
-                        </tr>
-                     ))}
-                  </tbody>
-               </table>
-            );
+         class DetalhesCachaca extends React.Component {
+            render() {
+               const { detalhes, fecharDetalhes } = this.props;
+               return (
+                  <div className="detalhes">
+                     <p>{detalhes}</p>
+                     <button onClick={fecharDetalhes}>Fechar</button>
+                  </div>
+               );
+            }
          }
 
-         function App() {
-            const [mostrarTabela, setMostrarTabela] = React.useState(false);
-            const [dados, setDados] = React.useState(cachacas);
+         class TabelaBebidas extends React.Component {
+            render() {
+               const { data, onSelect } = this.props;
+               return (
+                  <table id="tabela" border="1">
+                     <thead>
+                        <tr>
+                           <th>Nome</th>
+                           <th>Marca</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        {data.map((cachaca, index) => (
+                           <tr key={index} onClick={() => onSelect(cachaca)}>
+                              <td>{cachaca.nome}</td>
+                              <td>{cachaca.marca}</td>
+                           </tr>
+                        ))}
+                     </tbody>
+                  </table>
+               );
+            }
+         }
 
-            const alternarTabela = () => setMostrarTabela(!mostrarTabela);
+         class App extends React.Component {
+            constructor(props) {
+               super(props);
+               this.state = {
+                  mostrarTabela: false,
+                  dados: cachacas,
+                  detalhesAtuais: null,
+               };
+            }
 
-            const ordenarDados = () => {
-               const ordenado = [...dados].sort((a, b) =>
+            alternarTabela = () => {
+               this.setState((prevState) => ({ mostrarTabela: !prevState.mostrarTabela }));
+            };
+
+            ordenarDados = () => {
+               const ordenado = [...this.state.dados].sort((a, b) =>
                   a.nome.localeCompare(b.nome)
                );
-               setDados(ordenado);
+               this.setState({ dados: ordenado });
             };
 
-            const embaralharDados = () => {
-               const embaralhado = [...dados].sort(() => Math.random() - 0.5);
-               setDados(embaralhado);
+            embaralharDados = () => {
+               const embaralhado = [...this.state.dados].sort(() => Math.random() - 0.5);
+               this.setState({ dados: embaralhado });
             };
 
-            return (
-               <div id="buttons">
-                  <Cabecalho />
-                  <button onClick={alternarTabela}>
-                     {mostrarTabela ? "Esconder Tabela" : "Mostrar Tabela"}
-                  </button>
-                  <button onClick={ordenarDados}>Ordenar</button>
-                  <button onClick={embaralharDados}>Embaralhar</button>
-                  {mostrarTabela && <TabelaBebidas data={dados} />}
-               </div>
-            );
+            selecionarCachaca = (cachaca) => {
+               this.setState({ detalhesAtuais: cachaca.detalhes });
+            };
+
+            fecharDetalhes = () => {
+               this.setState({ detalhesAtuais: null });
+            };
+
+            render() {
+               const { mostrarTabela, dados, detalhesAtuais } = this.state;
+               return (
+                  <div id="buttons">
+                     <Cabecalho />
+                     <button onClick={this.alternarTabela}>
+                        {mostrarTabela ? "Esconder Tabela" : "Mostrar Tabela"}
+                     </button>
+                     <button onClick={this.ordenarDados}>Ordenar</button>
+                     <button onClick={this.embaralharDados}>Embaralhar</button>
+                     {mostrarTabela && (
+                        <TabelaBebidas data={dados} onSelect={this.selecionarCachaca} />
+                     )}
+                     {detalhesAtuais && (
+                        <DetalhesCachaca
+                           detalhes={detalhesAtuais}
+                           fecharDetalhes={this.fecharDetalhes}
+                        />
+                     )}
+                     <Rodape />
+                  </div>
+               );
+            }
          }
 
          ReactDOM.render(<App />, document.getElementById("app"));
