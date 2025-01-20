@@ -1,97 +1,163 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Receita 06 Programming Web</title>
-</head>
-<body>
-    <div id="test">
-        <button id="loadButton">
-            <h1>Load Beers</h1>
-        </button>
-        <button id="sortBeer">
-            <h1>Sort Beers</h1>
-        </button>
-        <button id="shuffleBeers">
-            <h1>Shuffle Beers</h1>
-        </button>
-    </div>
-    <div id="printBeers">
-        <div id="cervejasDiv">
-        </div>
-    </div>
+   <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width" />
+      <link href="styles/style-index.css" rel="stylesheet" />
+      <title>Receita 12 Programming Web</title>
+   </head>
 
-    <script>
-        let beers = [
-            { "name": "Brahma", "alcoholContent": "4.8 %", "style": "Lager", "ibu": "18" },
-            { "name": "Skol", "alcoholContent": "4.7 %", "style": "Pilsen", "ibu": "15" },
-            { "name": "Antarctica", "alcoholContent": "4.9 %", "style": "Cream Ale", "ibu": "20" },
-            { "name": "Bohemia", "alcoholContent": "5.0 %", "style": "Red Ale", "ibu": "25" },
-            { "name": "Budweiser", "alcoholContent": "5.0 %", "style": "Lager", "ibu": "10" },
-            { "name": "Stella Artois", "alcoholContent": "5.2 %", "style": "Pilsen", "ibu": "22" },
-            { "name": "Becks", "alcoholContent": "5.0 %", "style": "APA", "ibu": "30" },
-            { "name": "Corona", "alcoholContent": "4.5 %", "style": "Lager", "ibu": "12" },
-            { "name": "Patagonia", "alcoholContent": "5.4 %", "style": "Red Ale", "ibu": "27" },
-            { "name": "Serramalte", "alcoholContent": "5.5 %", "style": "English IPA", "ibu": "40" },
-            { "name": "Colorado", "alcoholContent": "5.2 %", "style": "Imperial Stout", "ibu": "50" },
-            { "name": "Leffe", "alcoholContent": "6.6 %", "style": "Belgian Ale", "ibu": "26" },
-            { "name": "Hoegaarden", "alcoholContent": "4.9 %", "style": "Witbier", "ibu": "15" },
-            { "name": "Cervejaria Wäls", "alcoholContent": "5.6 %", "style": "Pilsen", "ibu": "30" },
-            { "name": "Michelob Ultra", "alcoholContent": "4.2 %", "style": "Lager", "ibu": "10" },
-            { "name": "Quilmes", "alcoholContent": "4.9 %", "style": "Cream Ale", "ibu": "18" }
-        ];
+   <body>
+      <div id="app"></div>
 
-        const loadDiv = (targetId = "cervejasDiv", headers = ["Nome", "Álcool", "Estilo", "Amargor"], properties = ["name", "alcoholContent", "style", "ibu"]) => {
-            const targetElement = document.getElementById(targetId);
-            const button = document.getElementById("loadButton");
+      <script src="libs/react.js"></script>
+      <script src="libs/react-dom.js"></script>
+      <script src="libs/babel.js"></script>
 
-            if (targetElement && targetElement.innerHTML === "") {
-                renderBeers(beers, targetId, headers, properties);
-                button.querySelector("h1").textContent = "Unload Beers";
-            } else {
-                targetElement.innerHTML = ""; // Limpa o conteúdo do elemento
-                button.querySelector("h1").textContent = "Load Beers";
+      <script type="text/babel">
+         class Cabecalho extends React.Component {
+            render() {
+               return <h1>Tabela de Cachaças</h1>;
             }
-        }
+         }
 
-        const renderBeers = (list, targetId = "cervejasDiv", headers = ["Nome", "Álcool", "Estilo", "Amargor"], properties = ["name", "alcoholContent", "style", "ibu"]) => {
-            const targetElement = document.getElementById(targetId);
-            if (!targetElement) return;
+         class Rodape extends React.Component {
+            render() {
+               return (
+                  <footer>
+                     <p>Desenvolvido por Renan Costa, 2025</p>
+                  </footer>
+               );
+            }
+         }
 
-            const tableHtml = `
-                <table style="width: 100%; border-collapse: collapse;">
-                    <thead>
-                        <tr>
-                            ${headers.map(header => `<th style="border: 1px solid #000;">${header}</th>`).join("")}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${list.map(item => 
-                            `<tr>
-                                ${properties.map(prop => `<td style="border: 1px solid #000;">${item[prop] || ""}</td>`).join("")}
-                            </tr>`
-                        ).join("\n")}
-                    </tbody>
-                </table>
-            `;
+         const cachacas = [
+            { nome: "Havana", marca: "Engenho Anísio Santiago", detalhes: "Produzida em Salinas-MG." },
+            { nome: "Seleta", marca: "Engenho São João Batista", detalhes: "Uma das mais tradicionais do Brasil." },
+            { nome: "Boazinha", marca: "Engenho Boa Vista", detalhes: "Com sabor suave e marcante." },
+            { nome: "Velho Barreiro", marca: "Tatuzinho 3 Fazendas", detalhes: "Popular em todo o Brasil." },
+            { nome: "Salinas", marca: "Salinas", detalhes: "Ganhou vários prêmios de qualidade." },
+            { nome: "51", marca: "Companhia Müller de Bebidas", detalhes: "Famosa por sua acessibilidade." },
+            { nome: "Ypióca", marca: "Ypióca Agroindustrial", detalhes: "Produção com tradição de mais de 150 anos." },
+            { nome: "Pitu", marca: "Engarrafamento Pitú", detalhes: "Muito popular no nordeste." },
+            { nome: "Carvalheira", marca: "Engenho Carvalheira", detalhes: "Cachaça artesanal pernambucana." },
+            { nome: "Magnífica", marca: "Engenho D’ouro", detalhes: "Feita com fermentação natural." },
+         ];
 
-            targetElement.innerHTML = tableHtml;
-        }
+         class DetalhesCachaca extends React.Component {
+            render() {
+               const { detalhes, fecharDetalhes } = this.props;
+               return (
+                  <div className="detalhes">
+                     <p>{detalhes}</p>
+                     <button onClick={fecharDetalhes}>Fechar</button>
+                  </div>
+               );
+            }
+         }
 
-        const sortBeers = () => {
-            beers = beers.sort((a, b) => a.name.localeCompare(b.name));
-            renderBeers(beers);
-        }
+         class TabelaBebidas extends React.Component {
+            render() {
+               const { titulo, data, onSelect } = this.props;
+               const colunas = ["Nome", "Marca"];
 
-        const shuffleBeers = () => {
-            beers = beers.sort(() => Math.random() - 0.5); 
-            renderBeers(beers);  
-        }
+               return (
+                  <div>
+                     <h1>{titulo}</h1>
+                     <table id="tabela" border="1">
+                        <thead>
+                           <tr>
+                              {colunas.map((coluna, index) => (
+                                 <th key={index}>{coluna}</th>
+                              ))}
+                           </tr>
+                        </thead>
+                        <tbody>
+                           {data.map(({ nome, marca }, index) => (
+                              <tr key={index} onClick={() => onSelect(data[index])}>
+                                 <td>{nome}</td>
+                                 <td>{marca}</td>
+                              </tr>
+                           ))}
+                        </tbody>
+                     </table>
+                  </div>
+               );
+            }
+         }
 
-        document.getElementById("loadButton").addEventListener("click", () => loadDiv());
-        document.getElementById("sortBeer").addEventListener("click", sortBeers);
-        document.getElementById("shuffleBeers").addEventListener("click", shuffleBeers);
-    </script>
-</body>
+         class App extends React.Component {
+            constructor(props) {
+               super(props);
+               this.state = {
+                  mostrarTabela: false,
+                  dados: cachacas,
+                  detalhesAtuais: null,
+               };
+            }
+
+            alternarTabela = () => {
+               this.setState(({ mostrarTabela }) => ({ mostrarTabela: !mostrarTabela }));
+            };
+
+            ordenarDados = () => {
+               this.setState(({ dados }) => ({
+                  dados: [...dados].sort((a, b) => a.nome.localeCompare(b.nome)),
+               }));
+            };
+
+            embaralharDados = () => {
+               this.setState(({ dados }) => ({
+                  dados: [...dados].sort(() => Math.random() - 0.5),
+               }));
+            };
+
+            selecionarCachaca = ({ detalhes }) => {
+               this.setState({ detalhesAtuais: detalhes });
+            };
+
+            fecharDetalhes = () => {
+               this.setState({ detalhesAtuais: null });
+            };
+
+            render() {
+               const { mostrarTabela, dados, detalhesAtuais } = this.state;
+               return (
+                  <div>
+                     <div id="header">
+                        <Cabecalho />
+                     </div>
+                     <div id="controls">
+                        <button onClick={this.alternarTabela}>
+                           {mostrarTabela ? "Esconder Tabela" : "Mostrar Tabela"}
+                        </button>
+                        <button onClick={this.ordenarDados}>Ordenar</button>
+                        <button onClick={this.embaralharDados}>Embaralhar</button>
+                     </div>
+                     <div id="table">
+                        {mostrarTabela && (
+                           <TabelaBebidas
+                              titulo="Tabela de Cachaças"
+                              data={dados}
+                              onSelect={this.selecionarCachaca}
+                           />
+                        )}
+                        {detalhesAtuais && (
+                           <DetalhesCachaca
+                              detalhes={detalhesAtuais}
+                              fecharDetalhes={this.fecharDetalhes}
+                           />
+                        )}
+                     </div>
+                     <div id="footer">
+                        <Rodape />
+                     </div>
+                  </div>
+               );
+            }
+         }
+
+         ReactDOM.render(<App />, document.getElementById("app"));
+      </script>
+   </body>
 </html>
