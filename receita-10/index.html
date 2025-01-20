@@ -17,28 +17,28 @@
       <script type="text/babel">
          function TabelaBebidas() {
             return (
-               <table id="tabela" border="1">
-                  <thead>
-                     <tr>
-                        <th>Nome</th>
-                        <th>Marca</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr>
-                        <td>Havana</td>
-                        <td>Engenho Anísio Santiago</td>
-                     </tr>
-                  </tbody>
-               </table>
+               <div id="app">
+                  <h1>Tabela de Bebidas</h1>
+                  <table id="tabela" border="1">
+                     <thead>
+                        <tr>
+                           <th>Nome</th>
+                           <th>Marca</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td>Havana</td>
+                           <td>Engenho Anísio Santiago</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
             );
          }
 
          ReactDOM.render(
-            <div id="app">
-               <h1>Tabela de Bebidas</h1>
-               {TabelaBebidas()}
-            </div>,
+            <TabelaBebidas />,
             document.getElementById("app")
          );
       </script>
