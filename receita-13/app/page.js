@@ -1,12 +1,23 @@
-export default function Home(){
-    return (
+export default function Home() {
+  return (
+    <div>
+      <div>Menu principal</div>
+
+      <div>
+        <h1>GRANDE REI EXU</h1>
+      </div>
+    </div>
+  );
+}
+
+export function NewFunction() {
+  return (
+    <div>
+        <div>Menu principal</div>
+
         <div>
-            <div>Você é minha vida meu piquito</div>
-            <div>
-                <h1>
-                    Eu te amo mais que tusoooo nenzoooo
-                </h1>
-            </div>
-        </div>       
-    )
+            <h1>GRANDE REI EXU</h1>
+        </div>
+    </div>
+    );
 }

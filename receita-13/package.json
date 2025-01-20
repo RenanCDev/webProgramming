@@ -1,8 +1,5 @@
 {
-  "dependencies": {
-    "next": "^15.1.5"
-  },
-  "name": "receita-13",
+  "name": "next",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -12,5 +9,8 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "next": "^15.1.4"
+  }
 }
