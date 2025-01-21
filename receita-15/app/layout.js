@@ -1,4 +1,4 @@
-import Link from 'next/link'; // Importação necessária para usar o componente Link
+import Link from 'next/link';
 
 export const metadata = {
   title: 'Next.js',
