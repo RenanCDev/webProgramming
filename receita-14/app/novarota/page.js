@@ -14,13 +14,13 @@ export default function NovaRotaHome(){
        <div>
           
           <NewFunction/>
-          <Home2/>
+          <Home2 titulo='123'/>
 
           <h1>Nova Rota, Nova Página</h1>
 
-          <MariaPrea/>
-          <MariaPrea2/>
-          <MariaPrea3/>
+          <MariaPrea titulo='456'/>
+          <MariaPrea2 titulo='789'/>
+          <MariaPrea3 titulo='101112'/>
 
        </div>
 

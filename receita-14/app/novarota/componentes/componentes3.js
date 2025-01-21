@@ -1,10 +1,10 @@
 import React from 'react';
 
-export function MariaPrea3(){
+export function MariaPrea3({titulo}){
 
     return (
  
-       <h2>Morreu Maria Preá 3...</h2>
+       <h2>{titulo}</h2>
  
     )
  
