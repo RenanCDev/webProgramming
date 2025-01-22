@@ -1,10 +1,10 @@
 export default async function Home({ searchParams }) {
     const { 
       titleSearchKey = 'bagdad', 
-      type = '',
-      year = '',
-      page = 1
-    } = searchParams;
+      type = '', 
+      year = '', 
+      page = 1 
+    } = await searchParams;
   
     const res = await fetch(
       `http://www.omdbapi.com/?apikey=e0133284&s=${titleSearchKey}&type=${type}&y=${year}&page=${page}`
@@ -21,7 +21,15 @@ export default async function Home({ searchParams }) {
         <div>
           {data.Search.map((m) => (
             <div key={m.imdbID}>
-              {m.Title} --- {m.Year}
+              <h3>{m.Title} --- {m.Year}</h3>
+              {m.Poster !== 'N/A' && (
+                <img 
+                  src={m.Poster} 
+                  alt={`${m.Title} Poster`} 
+                  style={{ width: '200px', height: 'auto' }} 
+                />
+              )}
+              {m.Poster === 'N/A' && <p>Sem pôster disponível</p>}
             </div>
           ))}
         </div>
