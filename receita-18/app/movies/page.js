@@ -10,18 +10,21 @@ export default function MoviesPage() {
 
   const fetchMovies = async () => {
     try {
-      const targetYear = Number(yearSearchKey);
-      const minYear = targetYear - 5;
-      const maxYear = targetYear + 5;
+      if (!titleSearchKey.trim()) {
+        setError("Por favor, insira um título para a busca.");
+        return;
+      }
 
+      const targetYear = Number(yearSearchKey);
       if (isNaN(targetYear)) {
         setError("Por favor, insira um ano válido.");
         return;
       }
 
-      const res = await fetch(
-        `/movies/api?titleSearchKey=${titleSearchKey}&yearSearchKey=${yearSearchKey}`
-      );
+      const minYear = targetYear - 5;
+      const maxYear = targetYear + 5;
+
+      const res = await fetch(`/movies/api?titleSearchKey=${titleSearchKey}`);
       const data = await res.json();
 
       if (data.Search) {
@@ -31,12 +34,12 @@ export default function MoviesPage() {
         });
 
         setMovies(filteredMovies);
-        setError(null);
+        setError(filteredMovies.length > 0 ? null : "Nenhum filme encontrado no intervalo de anos.");
       } else {
         setMovies([]);
-        setError(data.Error || "Nenhum filme encontrado.");
+        setError(data.error || "Nenhum filme encontrado.");
       }
-    } catch (err) {
+    } catch {
       setError("Erro ao buscar os filmes.");
     }
   };

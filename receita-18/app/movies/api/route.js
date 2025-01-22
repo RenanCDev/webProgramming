@@ -1,15 +1,21 @@
 import { NextResponse } from "next/server";
 
 export async function GET(request) {
-  const { searchParams } = new URL(request.url);
-  const titleSearchKey = searchParams.get("titleSearchKey");
-  const yearSearchKey = searchParams.get("yearSearchKey");
+  try {
+    const { searchParams } = new URL(request.url);
+    const titleSearchKey = searchParams.get("titleSearchKey");
 
-  const res = await fetch(
-    `http://www.omdbapi.com/?apikey=e0133284&s=${titleSearchKey}&y=${yearSearchKey}`
-  );
+    const res = await fetch(
+      `http://www.omdbapi.com/?apikey=e0133284&s=${titleSearchKey}`
+    );
 
-  const data = await res.json();
+    if (!res.ok) {
+      throw new Error(`Erro na API OMDb: ${res.status}`);
+    }
 
-  return NextResponse.json(data);
+    const data = await res.json();
+    return NextResponse.json(data);
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
 }
