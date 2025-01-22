@@ -15,7 +15,19 @@ export default function RootLayout({ children }) {
               <Link href="/">Home</Link>
             </li>
             <li>
-              <Link href="/novarota">Nova Rota</Link>
+              <Link href="/rota1">Rota 1</Link>
+            </li>
+            <li>
+              <Link href="/rota2">Rota 2</Link>
+            </li>
+            <li>
+              <Link href="/rota3">Rota 3</Link>
+            </li>
+            <li>
+              <Link href="/rota4">Rota 4</Link>
+            </li>
+            <li>
+              <Link href="/rota5">Rota 5</Link>
             </li>
           </ul>
         </nav>

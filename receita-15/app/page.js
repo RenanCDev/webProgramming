@@ -1,25 +1,34 @@
-import React from 'react';
-
-export default function Home() {
+export default function MainPage() {
   return (
     <div>
-      <div>Menu principal</div>
+      <h1>Página Principal</h1>
+      <p>Bem-vindo ao meu aplicativo!</p>
+    </div>
+  );
+}
 
+export function Home({ page, titulo, subtitulo }) {
+  return (
+    <div>
+      <div>{page}</div>
       <div>
-        <h1>GRANDE REI EXU</h1>
+        <h1>{titulo}</h1>
+        <h2>{subtitulo}</h2>
+        <a>Home page app</a>
       </div>
     </div>
   );
 }
 
-export function NewFunction() {
+export function NewFunction({ page, titulo, subtitulo }) {
   return (
     <div>
-        <div>Menu principal</div>
-
-        <div>
-            <h1>GRANDE REI EXU</h1>
-        </div>
+      <div>{page}</div>
+      <div>
+        <h1>{titulo}</h1>
+        <h2>{subtitulo}</h2>
+        <a>NewFunction page app</a>
+      </div>
     </div>
-    );
+  );
 }

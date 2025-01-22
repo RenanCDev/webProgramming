@@ -1,15 +1,15 @@
-import { NewFunction } from "../page";
+import { Home, NewFunction } from '../page';
 
-export default function Home() {
+export default function Rota2() {
   return (
     <div>
-      <div>Exercicio02</div>
-
+      <div>rota2</div>
       <div>
-        <h1>Mojubá Exu!</h1>
+        <Home page="rota2" titulo="Título Rota 2" subtitulo="Subtítulo Rota 2" />
       </div>
-
-      <div>{NewFunction()}</div>
+      <div>
+        <NewFunction page="rota2" titulo="Título Rota 2" subtitulo="Subtítulo Rota 2" />
+      </div>
     </div>
   );
 }
