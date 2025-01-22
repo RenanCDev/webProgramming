@@ -7,17 +7,23 @@ export default function MoviesPage() {
   const [yearSearchKey, setYearSearchKey] = useState("");
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false); // Estado para controlar o carregamento
 
   const fetchMovies = async () => {
     try {
+      setIsLoading(true); // Inicia o carregamento
+      setError(null); // Reseta erros
+
       if (!titleSearchKey.trim()) {
         setError("Por favor, insira um título para a busca.");
+        setIsLoading(false);
         return;
       }
 
       const targetYear = Number(yearSearchKey);
       if (isNaN(targetYear)) {
         setError("Por favor, insira um ano válido.");
+        setIsLoading(false);
         return;
       }
 
@@ -41,12 +47,16 @@ export default function MoviesPage() {
       }
     } catch {
       setError("Erro ao buscar os filmes.");
+    } finally {
+      setIsLoading(false); // Finaliza o carregamento
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     fetchMovies();
+    setTitleSearchKey(""); // Reseta o título
+    setYearSearchKey(""); // Reseta o ano
   };
 
   return (
@@ -90,17 +100,18 @@ export default function MoviesPage() {
         />
         <button
           type="submit"
+          disabled={isLoading} // Desabilita o botão enquanto está carregando
           style={{
             padding: "10px 20px",
             fontSize: "16px",
-            color: "white",
-            backgroundColor: "#007BFF",
+            color: isLoading ? "gray" : "white", // Feedback visual
+            backgroundColor: isLoading ? "#ccc" : "#007BFF",
             border: "none",
             borderRadius: "5px",
-            cursor: "pointer",
+            cursor: isLoading ? "not-allowed" : "pointer",
           }}
         >
-          Pesquisar
+          {isLoading ? "Carregando..." : "Pesquisar"}
         </button>
       </form>
 
