@@ -32,6 +32,9 @@ export default function RootLayout({ children }) {
             <li>
               <Link href="/movies">Movies</Link>
             </li>
+            <li>
+              <Link href="/movieSearch">Movies Search</Link>
+            </li>
           </ul>
         </nav>
         {children}
