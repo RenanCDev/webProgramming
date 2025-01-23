@@ -83,32 +83,32 @@ export default function MoviesPage() {
     try {
       setIsLoading(true);
       setError(null);
-
+  
       if (!titleSearchKey.trim()) {
         setError("Por favor, insira um título para a busca.");
         setIsLoading(false);
         return;
       }
-
+  
       const targetYear = Number(yearSearchKey);
       if (isNaN(targetYear)) {
         setError("Por favor, insira um ano válido.");
         setIsLoading(false);
         return;
       }
-
+  
       const minYear = targetYear - 5;
       const maxYear = targetYear + 5;
-
+  
       const res = await fetch(`/movies/api?titleSearchKey=${titleSearchKey}`);
       const data = await res.json();
-
+  
       if (data.Search) {
         const filteredMovies = data.Search.filter((movie) => {
           const year = parseInt(movie.Year, 10);
           return year >= minYear && year <= maxYear;
         });
-
+  
         setMovies(filteredMovies);
         setError(filteredMovies.length > 0 ? null : "Nenhum filme encontrado no intervalo de anos.");
       } else {
@@ -118,9 +118,12 @@ export default function MoviesPage() {
     } catch {
       setError("Erro ao buscar os filmes.");
     } finally {
+      setTitleSearchKey("");
+      setYearSearchKey("");
       setIsLoading(false);
     }
   }, [titleSearchKey, yearSearchKey]);
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white flex flex-col items-center p-6">
