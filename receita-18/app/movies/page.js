@@ -7,12 +7,12 @@ export default function MoviesPage() {
   const [yearSearchKey, setYearSearchKey] = useState("");
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false); // Estado para controlar o carregamento
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchMovies = async () => {
     try {
-      setIsLoading(true); // Inicia o carregamento
-      setError(null); // Reseta erros
+      setIsLoading(true);
+      setError(null);
 
       if (!titleSearchKey.trim()) {
         setError("Por favor, insira um título para a busca.");
@@ -48,124 +48,76 @@ export default function MoviesPage() {
     } catch {
       setError("Erro ao buscar os filmes.");
     } finally {
-      setIsLoading(false); // Finaliza o carregamento
+      setIsLoading(false);
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     fetchMovies();
-    setTitleSearchKey(""); // Reseta o título
-    setYearSearchKey(""); // Reseta o ano
+    setTitleSearchKey("");
+    setYearSearchKey("");
   };
 
   return (
-    <div style={{ fontFamily: "Arial, sans-serif", padding: "20px" }}>
-      <h1 style={{ textAlign: "center" }}>Bem-vindo à Movies</h1>
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white flex flex-col items-center p-6">
+      <h1 className="text-5xl font-extrabold text-purple-500 mb-8 drop-shadow-lg">Bem-vindo à Movies</h1>
       <form
         onSubmit={handleSubmit}
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: "10px",
-          marginBottom: "20px",
-        }}
-      >
-        <input
-          type="text"
-          placeholder="Título"
-          value={titleSearchKey}
-          onChange={(e) => setTitleSearchKey(e.target.value)}
-          style={{
-            padding: "10px",
-            fontSize: "16px",
-            border: "1px solid #ccc",
-            borderRadius: "5px",
-          }}
-        />
-        <input
-          type="number"
-          placeholder="Ano (YYYY)"
-          min="1900"
-          max={new Date().getFullYear()}
-          value={yearSearchKey}
-          onChange={(e) => setYearSearchKey(e.target.value)}
-          style={{
-            padding: "10px",
-            fontSize: "16px",
-            border: "1px solid #ccc",
-            borderRadius: "5px",
-          }}
-        />
+        className="w-full max-w-2xl bg-gray-800 shadow-lg rounded-lg p-6 mb-10">
+        <div className="flex flex-col md:flex-row gap-4">
+          <input
+            type="text"
+            placeholder="Título"
+            value={titleSearchKey}
+            onChange={(e) => setTitleSearchKey(e.target.value)}
+            className="flex-1 p-3 border border-gray-700 rounded-lg bg-gray-700 text-white focus:ring-2 focus:ring-purple-500 outline-none placeholder-gray-400"
+          />
+          <input
+            type="number"
+            placeholder="Ano (YYYY)"
+            min="1900"
+            max={new Date().getFullYear()}
+            value={yearSearchKey}
+            onChange={(e) => setYearSearchKey(e.target.value)}
+            className="flex-1 p-3 border border-gray-700 rounded-lg bg-gray-700 text-white focus:ring-2 focus:ring-purple-500 outline-none placeholder-gray-400"
+          />
+        </div>
         <button
           type="submit"
-          disabled={isLoading} // Desabilita o botão enquanto está carregando
-          style={{
-            padding: "10px 20px",
-            fontSize: "16px",
-            color: isLoading ? "gray" : "white", // Feedback visual
-            backgroundColor: isLoading ? "#ccc" : "#007BFF",
-            border: "none",
-            borderRadius: "5px",
-            cursor: isLoading ? "not-allowed" : "pointer",
-          }}
-        >
+          disabled={isLoading}
+          className={`mt-4 w-full p-3 font-semibold rounded-lg transition-transform transform hover:scale-105 text-white shadow-md ${
+            isLoading
+              ? "bg-gray-500 cursor-not-allowed"
+              : "bg-purple-600 hover:bg-purple-700"
+          }`}>
           {isLoading ? "Carregando..." : "Pesquisar"}
         </button>
       </form>
 
-      {error && <div style={{ textAlign: "center", color: "red" }}>{error}</div>}
+      {error && <div className="text-red-500 text-lg mb-6 bg-gray-800 p-4 rounded-lg">{error}</div>}
 
       {movies.length > 0 && (
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-            gap: "20px",
-            padding: "10px",
-          }}
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {movies.map((movie) => (
             <div
               key={movie.imdbID}
-              style={{
-                textAlign: "center",
-                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-                padding: "10px",
-                borderRadius: "10px",
-                backgroundColor: "#f9f9f9",
-              }}
-            >
-              <h3 style={{ fontSize: "18px" }}>
-                {movie.Title} --- {movie.Year}
-              </h3>
+              className="bg-gray-800 shadow-md rounded-lg overflow-hidden transform hover:scale-105 transition-transform hover:shadow-lg">
               {movie.Poster !== "N/A" ? (
                 <img
                   src={movie.Poster}
                   alt={`${movie.Title} Poster`}
-                  style={{
-                    width: "150px",
-                    height: "225px",
-                    objectFit: "cover",
-                    borderRadius: "5px",
-                  }}
+                  className="w-full h-64 object-cover rounded-t-lg"
                 />
               ) : (
-                <div
-                  style={{
-                    width: "150px",
-                    height: "225px",
-                    backgroundColor: "#ccc",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    borderRadius: "5px",
-                  }}
-                >
-                  Sem pôster disponível
+                <div className="w-full h-64 bg-gray-600 flex items-center justify-center">
+                  <span className="text-gray-300">Sem pôster disponível</span>
                 </div>
               )}
+              <div className="p-4">
+                <h3 className="text-xl font-semibold text-purple-400 mb-2">{movie.Title}</h3>
+                <p className="text-gray-400">{movie.Year}</p>
+              </div>
             </div>
           ))}
         </div>
