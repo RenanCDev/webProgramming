@@ -1,0 +1,133 @@
+mortyverse
+    .next
+    node_modules
+    public
+    src
+        app
+            cards
+                layout.jsx
+            character
+                layout.jsx
+            episode
+                layout.jsx
+            favorites
+                layout.jsx
+            home
+                layout.jsx
+            location
+                layout.jsx
+            globals.css
+            layout.jsxpor-enquanto.jsx
+        components
+            CharacterCard.jsx
+            Footer.jsx
+            Header.jsx
+
+
+os arquivos mortyverse/src/app/cards/layout.jsx
+import "../globals.css";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+
+export const metadata = {
+  title: "MortyVerse",
+  description: "Cards Page - MortyVerse",
+};
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body className="bg-spaceBlue text-alienGreen min-h-screen flex flex-col">
+        <Header pageTitle="CARDS" />
+        console.log("Page Title:", "CARDS");
+        <main className="flex-grow container mx-auto p-4">{children}</main>
+        <Footer />
+      </body>
+    </html>
+  );
+}
+
+os arquivos de layout.jsx de character, episode, favorites, home, location estão iguais, mudando apenas o pageTitle.
+
+src/components/CharacterCar.jsx
+export default function CharacterCard({ character }) {
+    return (
+      <div className="bg-darkPurple text-neonGreen rounded-xl shadow-md p-4">
+        <img src={character.image} alt={character.name} className="w-full rounded-md" />
+        <h3 className="text-xl font-bold">{character.name}</h3>
+      </div>
+    );
+  }
+  
+  src/components/Footer.jsx
+  export default function Footer() {
+    return (
+      <footer className="bg-darkPurple text-center text-sm text-neonGreen py-2">
+        <p className="text-neonGreen">
+          © {new Date().getFullYear()} MortyVerse. Developed and created by{" "}
+          <a
+            href="https://github.com/RenanCDev"
+            className="text-neonGreen hover:text-portalGreen hover:underline mr-2 font-bold"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Renan Costa
+          </a>
+          <span className="text-neonGreen">and</span>
+          <a
+            href="https://github.com/luizmiguel4444"
+            className="text-neonGreen hover:text-portalGreen hover:underline ml-2 font-bold"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Luiz Miguel
+          </a>
+          .
+        </p>
+        <p className="text-portalGreen">
+          Wubba Lubba Dub Dub
+        </p>
+      </footer>
+    );
+  }
+  
+  src/components/Header.jsx
+  export default function Header({ pageTitle = "DEFAULT" }) {
+  return (
+    <header className="bg-darkPurple text-neonGreen py-4 shadow-lg">
+      <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+        {/* Logo alinhado à esquerda */}
+        <a href="/app/home" className="text-3xl font-bold hover:text-portalGreen">
+          MortyVerse
+        </a>
+
+        {/* Título centralizado e responsivo */}
+        <h1 className="text-2xl sm:text-4xl font-bold text-center sm:flex-grow truncate">
+          {pageTitle}
+        </h1>
+
+        {/* Menu alinhado à direita */}
+        <nav className="flex flex-wrap justify-center sm:justify-end gap-4">
+          <a href="/app/home" className="font-bold hover:underline hover:text-portalGreen">
+            Home
+          </a>
+          <a href="/app/favorites" className="font-bold hover:underline hover:text-portalGreen">
+            Favorites
+          </a>
+          <a href="/app/character" className="font-bold hover:underline hover:text-portalGreen">
+            Character
+          </a>
+          <a href="/app/location" className="font-bold hover:underline hover:text-portalGreen">
+            Location
+          </a>
+          <a href="/app/episode" className="font-bold hover:underline hover:text-portalGreen">
+            Episode
+          </a>
+          <a href="/app/cards" className="font-bold hover:underline hover:text-portalGreen">
+            Cards
+          </a>
+        </nav>
+      </div>
+    </header>
+  );
+}
